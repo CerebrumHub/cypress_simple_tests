@@ -1,0 +1,15 @@
+{
+    "Items": [
+        {
+            "cat": "phone",
+            "desc": "The HTC One M9 is powered by 1.5GHz octa-core Qualcomm Snapdragon 810 \nprocessor and it comes with 3GB of RAM. The phone packs 32GB of internal\n storage that can be expanded up to 128GB via a microSD card. ",
+            "id": 7,
+            "img": "imgs/HTC_M9.jpg",
+            "price": 700,
+            "title": "HTC One M9"
+        }
+    ],
+    "LastEvaluatedKey": {
+        "id": "9"
+    }
+}

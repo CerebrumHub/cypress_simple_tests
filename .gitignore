@@ -1,0 +1,6 @@
+/node_modules
+.idea
+/allure-report
+/allure-results
+/cypress/videos/*.mp4
+/cypress/screenshots/*.spec.js/*.png

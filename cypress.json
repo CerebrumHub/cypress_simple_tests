@@ -1,0 +1,9 @@
+{
+  "pageLoadTimeout"  :   8000,
+  "env" :   {
+    "firstCookieValue"  :   "firstValue",
+    "allure"  :   true,
+    "allureAttachRequests"  :   true
+  },
+  "experimentalSessionAndOrigin" : true
+}
