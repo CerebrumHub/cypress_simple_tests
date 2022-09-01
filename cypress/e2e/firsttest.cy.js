@@ -12,7 +12,7 @@ describe('First suite', ()=> {
         //cy.visit('program')
         cy.setCookie('firstCookie', 'firstValue')
         cy.allure().step("Open registration page", false)
-        cy.visit('cypress/fixtures/registration.html' , {timeout:12000})
+        cy.visit('cypress/fixtures/registration_form_ajax.html' , {timeout:12000})
         cy.get('#name').clear().type("Hey yoo {enter}")
         cy.allure().attachment("This is test attachment", "Attachment string can be here", "text/plain")
         cy.screenshot('full_name')
