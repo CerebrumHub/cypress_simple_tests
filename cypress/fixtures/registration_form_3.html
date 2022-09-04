@@ -3,7 +3,6 @@
 
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 <body>
@@ -13,7 +12,7 @@
 </div>
 
 <form class="w3-container w3-card-4 w3-light-grey" style="width:50%" name="myForm"
-      ng-app="registration" ng-controller="validateCtrl" novalidate>
+      ng-app="registration" ng-controller="validateCtrl" action="upload_file.html" novalidate>
     <div class="w3-cell-row">
         <div class="w3-container w3-cell">
             <div>
@@ -52,19 +51,29 @@
                 <input type="radio" name="freq" value="Monthly"/><label>Monthly</label><br>
                 <input type="radio" name="freq" value="Never"/><label>Never</label><br>
             </div>
+            <div class="w3-container w3-teal w3-center" style="width:50%">
+                <h1>Upload a file</h1>
+            </div>
+            <div class="w3-cell-row">
+                <div class="w3-container w3-cell">
+                    <input type="file" id="myFile" name="filename">
+                    <input type="submit">
+                </div>
+            </div>
             <div>
                 <input type="checkbox">Accept our privacy policy</input>
-                <input type="checkbox"><button><a href="cookiePolicy.html">Accept our cookie policy</a></input>
+                <input type="checkbox">
+                <button><a href="cookiePolicy.html">Accept our cookie policy</a></button>
             </div>
         </div>
     </div>
     <p>
         <input ng-disabled="myForm.$invalid" type="submit" onclick="postYourAdd()">
-        <span id="successFrame" />
+        <span id="successFrame"/>
     </p>
 
     <script>
-        function postYourAdd () {
+        function postYourAdd() {
             document.getElementById("successFrame").innerHTML = "Successful registration";
         }
 
@@ -73,14 +82,14 @@
 
 <script>
     var app = angular.module('registration', []);
-    app.controller('validateCtrl', function($scope) {
+    app.controller('validateCtrl', function ($scope) {
         $scope.countries = {
-            'Spain': ['Malaga','Madrid','Valencia','Corralejo'],
+            'Spain': ['Malaga', 'Madrid', 'Valencia', 'Corralejo'],
             'Estonia': ['Tallinn', 'Haapsalu', 'Tartu'],
             'Austria': ['Vienna', 'Salzburg', 'Innsbruck']
         };
 
-        $scope.getSelectedCountry = function() {
+        $scope.getSelectedCountry = function () {
             $scope.strCountry = $scope.countrySrc;
         };
     });

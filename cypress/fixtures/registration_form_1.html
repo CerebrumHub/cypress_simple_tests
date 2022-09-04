@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cypress advanced registration from</title>
+    <script type="text/javascript">
+
+        // Input fields should be only string or numbers
+        function checkInputPattern(naming) {
+            const element = document.querySelector(`input[name=${naming}]`);
+
+            const pattern = element.getAttribute("pattern");
+            const re = new RegExp(pattern);
+            if (re.test(element.value)) {
+                element.setCustomValidity('');
+                console.log('Input field has valid characters')
+            } else {
+                element.setCustomValidity('Input field has invalid value');
+                console.log('Input field has invalid character');
+            }
+        }
+
+        // password and repeat password should be the same
+        function onChange() {
+            const password = document.querySelector('input[name=password]');
+            const confirm = document.querySelector('input[name=confirm]');
+            if (confirm.value === password.value) {
+                confirm.setCustomValidity('');
+                console.log('Checked that passwords have same values - valid')
+            } else {
+                confirm.setCustomValidity('Passwords do not match');
+                console.log('Passwords are different');
+            }
+        }
+
+        function checkMandatoryFields() {
+            // Radio button is not mandatory
+            // One of checkboxes is mandatory
+            // Check
+            // Error if something is wrong
+            // Submit should be disabled until all conditions are filled
+        }
+
+    </script>
+    <style>
+        /*Here will be CSS*/
+        h2 {
+            color: red;
+            font-weight: normal;
+        }
+
+        /* Error styling, change boarder to red*/
+        /*project structure*/
+    </style>
+</head>
+<body>
+<h1>Registration form number 1</h1>
+<nav>Home</nav>
+<nav>Contacts</nav>
+<div>
+    <div>
+        <p>This is simple registration form</p>
+    </div>
+</div>
+<p>This is <span>simple</span> registration form</p>
+<img src="cerebrum_hub_logo.png" width="178" height="166" alt="cerebrum_hub_logo">
+<a href="https://cerebrumhub.com/">Cerebrum Hub homepage</a>
+
+<form>
+    <h2>Input username</h2>
+    <p>Username string should consist only of alphabetic and numeric characters</p>
+    <label for="username">Username:</label>
+
+    <!--Max length, and placeholder-->
+    <input type="text" id="username" name="username" placeholder="Frank Abagnale" maxlength="50" required onchange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]*'>
+
+    <h2>Phone number</h2>
+    <p>Only numeric data can be used</p>
+    <label for="phoneNumber">Phone number:</label>
+    <input type="number" id="phoneNumber" placeholder="8775048423" maxlength="10">
+
+    <h2>Password section</h2>
+    <p>NB! Passwords should match</p>
+    <!--    Will also check that both passwords are similar-->
+    <label>Password: <input name="password" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+    <label>Confirm : <input name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+    <!--    Submit button, as part of form section - part of passwords validation as well-->
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

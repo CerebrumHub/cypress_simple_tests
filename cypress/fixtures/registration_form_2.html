@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cypress advanced registration from</title>
+    <script src="registration.js"></script>
+    <link href="registration.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Registration form number 1</h1>
+<nav>Home</nav>
+<nav>Contacts</nav>
+<div>
+    <div>
+        <p id="top">This is simple registration form</p>
+    </div>
+</div>
+<p>This is <span>simple</span> registration form</p>
+<img src="cerebrum_hub_logo.png" width="178" height="166" alt="cerebrum_hub_logo">
+<a href="https://cerebrumhub.com/">Cerebrum Hub homepage</a>
+
+<!--Table-->
+<table>
+    <thead>
+    <tr>
+        <th scope="col">Company Name</th>
+        <th scope="col">Company Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="1">Company number 1</td>
+        <td rowspan="1">The best company</td>
+    </tr>
+    <tr>
+        <td rowspan="1">Another company nr 2</td>
+        <td rowspan="1">Competitor of best company</td>
+    </tr>
+    </tbody>
+</table>
+
+<!--List-->
+<ul>
+    <li>Item one</li>
+    <li>Item two</li>
+    <li>Item three
+        <ul>
+            <li>Item 3.1</li>
+            <li>Item 3.2</li>
+        </ul>
+</ul>
+
+<form>
+    <h2>Input username</h2>
+    <p>Username string should consist only of alphabetic and numeric characters</p>
+    <label for="username">Username:</label>
+
+    <!--Max length, and placeholder-->
+    <input type="text" id="username" name="username" placeholder="Frank Abagnale" maxlength="50" required onchange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]*'>
+    <h3>Input email</h3>
+    <label for="email">Username:</label>
+    <input type="email" id="email" name="email" placeholder="aurevoir@ipanema.ee" maxlength="50"
+           onchange="checkInputPattern('email')"
+           pattern="[a-z0-9]+@[a-z0-9]+\.[a-z]{2,4}$"
+           required>
+
+    <!--Anchor tag to page top-->
+    <a href="#top">top</a>
+
+    <!--Radio button section-->
+    <p>Please select your favorite Web language:</p>
+    <input type="radio" id="html" name="fav_language" value="HTML">
+    <label for="html">HTML</label><br>
+    <input type="radio" id="css" name="fav_language" value="CSS">
+    <label for="css">CSS</label><br>
+    <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+    <label for="javascript">JavaScript</label>
+
+    <!--Checkboxes section-->
+    <h1>Your favourite transport</h1>
+    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <label for="vehicle1"> I have a bike</label><br>
+    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+    <label for="vehicle2"> I have a car</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> I have a boat</label><br><br>
+
+    <h2>Password section</h2>
+    <p>NB! Passwords should match</p>
+    <!--    Will also check that both passwords are similar-->
+    <label>Password: <input name="password" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+    <label>Confirm : <input name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+    <!--    Submit button, as part of form section - part of passwords validation as well-->
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
