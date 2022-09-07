@@ -2,16 +2,11 @@ describe('This is first test suite', ()=>{
     it('User can submit data only when valid mandatory values are added', ()=> {
         cy.visit('cypress/fixtures/registration_form_1.html')
         cy.get('#username').type('Tester 123')
-        cy.get('[name="password"]').type('MyPass')
+        cy.get('.phoneNumberTestId').type('1020304050')
+        cy.get('input[name="password"]').type('MyPass')
         cy.get('[name="confirm"]').type('MyPass')
-        cy.get('[type="submit"]').click()
-        // Fill values
-            // Username: Tester123
-            // Phone number
-            // Password and confirmation - Password008
-        // Assert that click button is enabled
-        // Click submit button
-        // Assert that button is clicked and no errors present
+        cy.get('.submit_button').click()
+
     });
 
     it('User cannot submit data when username is absent', ()=>{
