@@ -24,7 +24,7 @@
     <!--Max length, and placeholder-->
     <input class="input" type="text" id="username" name="username" placeholder="Frank Abagnale" min="1" max="50"
            required
-           onchange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]*'>
+           onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+'>
 
     <h2>Phone number</h2>
     <p>Only numeric data can be used</p>
@@ -37,10 +37,20 @@
     <!--    Will also check that both passwords are similar-->
     <label>Password:
         <input class="input" name="password" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
-    <label>Confirm :
+    <label>Confirm:
         <input class="input" name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
     <!--    Submit button, as part of form section - part of passwords validation as well-->
-    <button class="submit_button">Submit</button>
+    <button class="submit_button" onclick="successMessage()">Submit</button>
+    <p id="password_error_message">
+            Passwords do not match!
+    </p>
+    <p id="input_error_message">
+        Mandatory input field is not valid or empty!
+    </p>
+    <div id="success_message">
+        <span class="close_button" onclick="this.parentElement.style.display='none';">&times;</span>
+        User successfully submitted registration
+    </div>
 </form>
 </body>
 <script type="text/javascript">
@@ -48,16 +58,20 @@
     let submit_button = document.querySelector(".submit_button");
     submit_button.disabled = true;
 
+    document.getElementById("success_message").style.display = "none"
+    document.getElementById("password_error_message").style.display = "none"
+    document.getElementById("input_error_message").style.display = "none"
+
     // Input fields should be only string or numbers
     function checkInputPattern(naming) {
         const element = document.querySelector(`input[name=${naming}]`);
         const pattern = element.getAttribute("pattern");
         const re = new RegExp(pattern);
         if (re.test(element.value)) {
-            element.setCustomValidity('');
+            document.getElementById("input_error_message").style.display = "none"
             console.log('Input field has valid characters')
         } else {
-            element.setCustomValidity('Input field has invalid value');
+            document.getElementById("input_error_message").style.display = "block"
             console.log('Input field has invalid character');
         }
     }
@@ -67,10 +81,10 @@
         const password = document.querySelector('input[name=password]');
         const confirm = document.querySelector('input[name=confirm]');
         if (confirm.value === password.value) {
-            confirm.setCustomValidity('');
+            document.getElementById("input_error_message").style.display = "none"
             console.log('Checked that passwords have same values - valid')
         } else {
-            confirm.setCustomValidity('Passwords do not match');
+            document.getElementById("input_error_message").style.display = "block"
             console.log('Passwords are different');
         }
     }
@@ -88,6 +102,30 @@
             submit_button.disabled = true; //submit_button remains disabled
             console.log('Submit button will be disable')
         }
+    }
+
+    function successMessage() {
+        // show new HTML part with success message
+        document.getElementById("success_message").style.display = "block"
+        console.log('Showing success message')
+    }
+
+    // This will imitate loading for 2 seconds, and success message will be still present until loading is finished
+    const myForm = document.getElementById('applicationForm')
+    myForm.addEventListener('submit', handleSubmit)
+    let submitTimer
+
+    function handleSubmit(event) {
+        event.preventDefault()
+        submitTimer = setTimeout(() => {
+            this.submit()
+            console.log('Submitted after 5 seconds')
+        }, 2000)
+    }
+
+    function cancel() {
+        clearTimeout(submitTimer);
+        console.log('Submit Canceled')
     }
 
 </script>

@@ -49,13 +49,16 @@
         </ul>
 </ul>
 
-<form>
+<form id="applicationForm">
     <h2>Input username</h2>
     <p>Username string should consist only of alphabetic and numeric characters</p>
     <label for="username">Username:</label>
 
     <!--Max length, and placeholder-->
-    <input type="text" id="username" name="username" placeholder="Frank Abagnale" maxlength="50" required onchange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]*'>
+    <!--Max length, and placeholder-->
+    <input class="input" type="text" id="username" name="username" placeholder="Frank Abagnale" min="1" max="50"
+           required
+           onchange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]*'>
     <h3>Input email</h3>
     <label for="email">Username:</label>
     <input type="email" id="email" name="email" placeholder="aurevoir@ipanema.ee" maxlength="50"
@@ -87,10 +90,19 @@
     <h2>Password section</h2>
     <p>NB! Passwords should match</p>
     <!--    Will also check that both passwords are similar-->
-    <label>Password: <input name="password" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
-    <label>Confirm : <input name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+    <label>Password:
+        <input class="input" name="password" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+    <label>Confirm:
+        <input class="input" name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
     <!--    Submit button, as part of form section - part of passwords validation as well-->
-    <input type="submit" value="Submit">
+    <button class="submit_button" onclick="successMessage()">Submit</button>
+    <p id="password_error_message">
+        Passwords do not match!
+    </p>
+    <div id="alert">
+        <span class="close_button" onclick="this.parentElement.style.display='none';">&times;</span>
+        User successfully submitted registration
+    </div>
 </form>
 </body>
 </html>
