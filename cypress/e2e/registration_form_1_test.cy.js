@@ -1,9 +1,9 @@
-beforeEach(()=>{
+beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_1.html')
 })
 
-describe('This is first test suite', ()=>{
-    it('User can submit data only when valid mandatory values are added', ()=> {
+describe('This is first test suite', () => {
+    it('User can submit data only when valid mandatory values are added', () => {
         cy.get('#username').type('Tester 123')
         cy.get('.phoneNumberTestId').type('1020304050')
         cy.get('input[name="password"]').type('MyPass')
@@ -17,9 +17,16 @@ describe('This is first test suite', ()=>{
         cy.get('#success_message').should('have.css', 'display', 'block')
     });
 
-    it('User cannot submit data when username is absent', ()=>{
+    it('User cannot submit data when username is absent', () => {
+        // Checking form validation without making actions on form
+        cy.get('#form-validation').then(({$form}) => {
+            expect($form[0].checkValidity()).to.be.false
+        })
+        cy.get('#form-validation :invalid').should('have.length', 1)
+
         cy.get('#username').clear()
         cy.get('#username').should('have.class', ':invalid')
+        cy.get('input[name="username"]:invalid').invoke('prop', 'validationMessage').should('equal', 'Please fill out this field.')
         cy.get('#phoneNumberTestId').type('1020304050')
         cy.get('input[name="password"]').type('MyPass')
         cy.get('[name="confirm"]').type('MyPass')
@@ -32,12 +39,12 @@ describe('This is first test suite', ()=>{
         cy.get('#success_message').should('have.css', 'display', 'none')
     })
 
-    it('User can use only numbers for phone number', ()=>{
+    it('User can use only numbers for phone number', () => {
         // Asserting that attribute type=number is present - only numbers are supported
         cy.get('#phoneNumberTestId').should('have.attr', 'type', 'number')
     })
 
-    it('User can use only same both first and validation passwords', ()=> {
+    it('User can use only same both first and validation passwords', () => {
         cy.get('#username').clear()
         cy.get('#username').should('have.class', ':invalid')
         cy.get('#phoneNumberTestId').type('1020304050')

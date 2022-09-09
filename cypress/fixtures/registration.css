@@ -1,8 +1,13 @@
 /*Here will be CSS*/
 h2 {
-    color: red;
+    color: blue;
     font-weight: normal;
 }
 
-/* Error styling, change boarder to red*/
-/*project structure*/
+input:invalid {
+    box-shadow: 0 0 5px 1px red;
+}
+
+input:focus:invalid {
+    box-shadow: none;
+}

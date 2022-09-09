@@ -1,8 +1,9 @@
 let submit_button = document.querySelector(".submit_button");
 submit_button.disabled = true;
 
-document.getElementById("alert").style.display = "none"
+document.getElementById("success_message").style.display = "none"
 document.getElementById("password_error_message").style.display = "none"
+document.getElementById("input_error_message").style.display = "none"
 
 // Input fields should be only string or numbers
 function checkInputPattern(naming) {
@@ -10,10 +11,10 @@ function checkInputPattern(naming) {
     const pattern = element.getAttribute("pattern");
     const re = new RegExp(pattern);
     if (re.test(element.value)) {
-        element.setCustomValidity('');
+        document.getElementById("input_error_message").style.display = "none"
         console.log('Input field has valid characters')
     } else {
-        element.setCustomValidity('Input field has invalid value');
+        document.getElementById("input_error_message").style.display = "block"
         console.log('Input field has invalid character');
     }
 }
@@ -23,17 +24,10 @@ function onChange() {
     const password = document.querySelector('input[name=password]');
     const confirm = document.querySelector('input[name=confirm]');
     if (confirm.value === password.value) {
-        /*
-        Multiple solution for showing error:
-        1.Using style display - hide and show error message text
-        2.Using setCustomValidity - show tooltip with error message
-         */
-        document.getElementById("password_error_message").style.display = "none"
-        confirm.setCustomValidity('');
+        document.getElementById("input_error_message").style.display = "none"
         console.log('Checked that passwords have same values - valid')
     } else {
-        document.getElementById("password_error_message").style.display = "block"
-        confirm.setCustomValidity('Passwords do not match');
+        document.getElementById("input_error_message").style.display = "block"
         console.log('Passwords are different');
     }
 }
@@ -55,7 +49,7 @@ function stateHandle() {
 
 function successMessage() {
     // show new HTML part with success message
-    document.getElementById("alert").style.display = "block"
+    document.getElementById("success_message").style.display = "block"
     console.log('Showing success message')
 }
 
@@ -76,3 +70,6 @@ function cancel() {
     clearTimeout(submitTimer);
     console.log('Submit Canceled')
 }
+
+today = new Date().toLocaleDateString('en-ca')
+document.getElementById("birthday").setAttribute("max", today);

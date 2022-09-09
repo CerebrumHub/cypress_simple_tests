@@ -2,36 +2,35 @@
 <html lang="en">
 <head>
     <title>Cypress advanced registration from</title>
-    <script src="registration.js"></script>
-    <link href="registration.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>Registration form number 1</h1>
-<nav>Home</nav>
-<nav>Contacts</nav>
+<h1>Registration form number 2</h1>
+<nav>
+    <a href="registration_form_1.html">Registration form 1</a>
+    <a href="https://cerebrumhub.com/">Cerebrum Hub homepage</a>
+</nav>
 <div>
     <div>
-        <p id="top">This is simple registration form</p>
+        <p id="top">This is more advanced registration form, some parts are reused from form 1</p>
     </div>
 </div>
 <p>This is <span>simple</span> registration form</p>
 <img src="cerebrum_hub_logo.png" width="178" height="166" alt="cerebrum_hub_logo">
-<a href="https://cerebrumhub.com/">Cerebrum Hub homepage</a>
 
 <!--Table-->
 <table>
     <thead>
-    <tr>
+    <tr class="tableRow">
         <th scope="col">Company Name</th>
         <th scope="col">Company Description</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
+    <tr class="tableRow">
         <td rowspan="1">Company number 1</td>
         <td rowspan="1">The best company</td>
     </tr>
-    <tr>
+    <tr class="tableRow">
         <td rowspan="1">Another company nr 2</td>
         <td rowspan="1">Competitor of best company</td>
     </tr>
@@ -40,22 +39,21 @@
 
 <!--List-->
 <ul>
-    <li>Item one</li>
-    <li>Item two</li>
-    <li>Item three
+    <li class="listRow">Item one</li>
+    <li class="listRow">Item two</li>
+    <li class="listRow">Item three
         <ul>
-            <li>Item 3.1</li>
-            <li>Item 3.2</li>
+            <li class="listRow">Item 3.1</li>
+            <li class="listRow">Item 3.2</li>
         </ul>
 </ul>
 
 <form id="applicationForm">
-    <h2>Input username</h2>
+    <h2 data-testid="userInput">Input username</h2>
     <p>Username string should consist only of alphabetic and numeric characters</p>
     <label for="username">Username:</label>
 
-    <!--Max length, and placeholder-->
-    <!--Max length, and placeholder-->
+    <!--Max length and placeholder-->
     <input class="input" type="text" id="username" name="username" placeholder="Frank Abagnale" min="1" max="50"
            required
            onchange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]*'>
@@ -70,22 +68,40 @@
     <a href="#top">top</a>
 
     <!--Radio button section-->
-    <p>Please select your favorite Web language:</p>
-    <input type="radio" id="html" name="fav_language" value="HTML">
-    <label for="html">HTML</label><br>
-    <input type="radio" id="css" name="fav_language" value="CSS">
-    <label for="css">CSS</label><br>
-    <input type="radio" id="javascript" name="fav_language" value="JavaScript">
-    <label for="javascript">JavaScript</label>
+    <h2>Please select your favorite Web language:</h2>
+    <p>Not mandatory field</p>
+    <input type="radio" id="htmlFavLanguage" name="fav_language" value="HTML">
+    <label for="htmlFavLanguage">HTML</label><br>
+    <input type="radio" id="cssFavLanguage" name="fav_language" value="CSS">
+    <label for="cssFavLanguage">CSS</label><br>
+    <input type="radio" id="javascriptFavLanguage" name="fav_language" value="JavaScript">
+    <label for="javascriptFavLanguage">JavaScript</label>
 
     <!--Checkboxes section-->
-    <h1>Your favourite transport</h1>
-    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <h2>Your favourite transport</h2>
+    <p>Not mandatory field</p>
+    <input class="checkbox vehicles" type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
     <label for="vehicle1"> I have a bike</label><br>
-    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+    <input class="checkbox vehicles" type="checkbox" id="vehicle2" name="vehicle2" value="Car">
     <label for="vehicle2"> I have a car</label><br>
-    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <input class="checkbox vehicles" type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
     <label for="vehicle3"> I have a boat</label><br><br>
+
+    <h2>Birthday</h2>
+    <p>Mandatory field that is set as required</p>
+    <label for="birthday">Birthday:</label>
+    <input type="date" id="birthday" name="birthday" required>
+
+    <h2>Select a car</h2>
+    <p>This section is simply to check functionality, simply chose one brand from the list</p>
+    <label for="cars">Choose a car:</label>
+    <select name="cars" id="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+    <br><br>
 
     <h2>Password section</h2>
     <p>NB! Passwords should match</p>
@@ -99,10 +115,15 @@
     <p id="password_error_message">
         Passwords do not match!
     </p>
-    <div id="alert">
+    <p id="input_error_message">
+        Mandatory input field is not valid or empty!
+    </p>
+    <div id="success_message">
         <span class="close_button" onclick="this.parentElement.style.display='none';">&times;</span>
         User successfully submitted registration
     </div>
+    <script src="registration.js"></script>
+    <link href="registration.css" rel="stylesheet" type="text/css">
 </form>
 </body>
 </html>
