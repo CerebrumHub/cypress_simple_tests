@@ -2,10 +2,23 @@ beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_1.html')
 })
 
+
+// Instructions for workshop #4:
+//
+// 1. Update the name of test suite by adding you name: “This is first test suite, John Smith”
+// 2. Replace text ‘MyPass’ in the first test with your own chosen password (2 places)
+// 3. Change phone number in the first test to 555666777
+// 4. Change the order of steps in the first test:
+//      -first set phone number
+//      -then 2 password fields
+//      -then username
+// 5. Add comment to the first test containing today’s date
+
+
 describe('This is first test suite', () => {
     it('User can submit data only when valid mandatory values are added', () => {
         cy.get('#username').type('Tester 123')
-        cy.get('.phoneNumberTestId').type('1020304050')
+        cy.get('.phoneNumberTestId').type('555666777')
         cy.get('input[name="password"]').type('MyPass')
         cy.get('[name="confirm"]').type('MyPass')
         cy.get('.submit_button').click()
