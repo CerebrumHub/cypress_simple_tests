@@ -22,9 +22,33 @@
     <label for="username">Username:</label>
 
     <!--Max length, and placeholder-->
-    <input class="input" type="text" id="username" name="username" placeholder="Frank Abagnale" min="1" max="50"
+    <input class="input" type="text" id="username" name="username" placeholder="username" min="1" max="50"
            required
            onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+'>
+
+    <h2>First name</h2>
+    <p>Please enter your first name</p>
+    <label for="firstName">First name:</label>
+
+    <!--Max length, and placeholder-->
+    <input class="input" type="text" id="firstName" name="firstName" placeholder="John" min="1" max="50"
+           onChange="checkInputPattern('firstName')" pattern='[a-zA-Z]+'>
+
+    <h2>Middle name</h2>
+    <p>Please enter your middle name</p>
+    <label for="middleName">Middle name:</label>
+
+    <!--Max length, and placeholder-->
+    <input class="input" type="text" id="middleName" name="middleName" placeholder="Harry" min="1" max="50"
+           onChange="checkInputPattern('middleName')" pattern='[a-zA-Z]+'>
+
+    <h2>Last name</h2>
+    <p>Please enter your middle name</p>
+    <label for="lastName">Last name:</label>
+
+    <!--Max length, and placeholder-->
+    <input class="input" type="text" id="lastName" name="lastName" placeholder="Smith" min="1" max="50"
+           onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]+'>
 
     <h2>Phone number</h2>
     <p>Only numeric data can be used</p>
