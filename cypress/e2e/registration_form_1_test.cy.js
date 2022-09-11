@@ -2,26 +2,22 @@ beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_1.html')
 })
 
-// Instructions for workshop #4:
+// Workshop 4 assignment:
 //
 // 1. Update the name of test suite by adding you name: “This is first test suite, John Smith”
-// 2. Replace text ‘MyPass’ in the first test with your own chosen password (2 places)
+// 2. Replace text ‘MyPass’ in the first test with your own chosen password (2 places) - passwords should match
 // 3. Change phone number in the first test to 555666777
 // 4. Change the order of steps in the first test:
 //      -first set phone number
 //      -then 2 password fields
 //      -then username
 // 5. Add comment to the first test containing today’s date
-/*
-Selecting elements:
-1.  By Class -
- */
 
 describe('This is first test suite', () => {
     it.only('User can submit data only when valid mandatory values are added', () => {
         cy.get('#username').type('Something')
         cy.get('#firstName').type('John')
-        cy.get('#lastName').type('John')
+        cy.get('#lastName').type('Doe')
         cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
         cy.get('input[name="password"]').type('MyPass')
         cy.get('[name="confirm"]').type('MyPass')
@@ -36,7 +32,7 @@ describe('This is first test suite', () => {
         cy.get('#success_message').should('have.css', 'display', 'block')
     });
 
-    it('User cannot submit data when username is absent', () => {
+    it.only('User cannot submit data when username is absent', () => {
         // Checking form validation without making actions on form
         cy.get('#applicationForm').then(({$form}) => {
             expect($form[0].checkValidity()).to.be.false
