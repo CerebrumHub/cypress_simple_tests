@@ -12,70 +12,58 @@
         <p>This is simple registration form</p>
     </div>
 </div>
-<p>This is <span>simple</span> registration form</p>
 <img src="cerebrum_hub_logo.png" width="178" height="166" alt="cerebrum_hub_logo">
 <a href="https://cerebrumhub.com/">Cerebrum Hub homepage</a>
+<div class="flex-container">
+    <form id="applicationForm">
+        <h2>Input username</h2>
+        <p>Username string should consist only of alphabetic and numeric characters</p>
+        <label for="username">Username:</label>
+        <input class="input" type="text" id="username" name="username" placeholder="John01" min="1" max="50"
+               required
+               onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+'>
 
-<form id="applicationForm">
-    <h2>Input username</h2>
-    <p>Username string should consist only of alphabetic and numeric characters</p>
-    <label for="username">Username:</label>
+        <h2>First name</h2>
+        <p>Please enter your first name</p>
+        <label for="firstName">First name:</label>
+        <input class="input" type="text" id="firstName" name="firstName" placeholder="John" min="1" max="50"
+               onChange="checkInputPattern('firstName')" pattern='[a-zA-Z]+'>
 
-    <!--Max length, and placeholder-->
-    <input class="input" type="text" id="username" name="username" placeholder="username" min="1" max="50"
-           required
-           onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+'>
+        <h2>Last name</h2>
+        <p>Please enter your last name</p>
+        <label for="lastName">Last name:</label>
+        <input class="input" type="text" data-testid="lastNameTestId" id="lastName" name="lastName" placeholder="Smith" min="1" max="30"
+               onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]+'>
 
-    <h2>First name</h2>
-    <p>Please enter your first name</p>
-    <label for="firstName">First name:</label>
+        <h2>Phone number</h2>
+        <p>Only numeric data can be used</p>
+        <label for="phoneNumber">Phone number:</label>
+        <input class="input" type="number" id="phoneNumber" data-testid="phoneNumberTestId" placeholder="8775048423"
+               maxlength="10">
 
-    <!--Max length, and placeholder-->
-    <input class="input" type="text" id="firstName" name="firstName" placeholder="John" min="1" max="50"
-           onChange="checkInputPattern('firstName')" pattern='[a-zA-Z]+'>
-
-    <h2>Middle name</h2>
-    <p>Please enter your middle name</p>
-    <label for="middleName">Middle name:</label>
-
-    <!--Max length, and placeholder-->
-    <input class="input" type="text" id="middleName" name="middleName" placeholder="Harry" min="1" max="50"
-           onChange="checkInputPattern('middleName')" pattern='[a-zA-Z]+'>
-
-    <h2>Last name</h2>
-    <p>Please enter your middle name</p>
-    <label for="lastName">Last name:</label>
-
-    <!--Max length, and placeholder-->
-    <input class="input" type="text" id="lastName" name="lastName" placeholder="Smith" min="1" max="50"
-           onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]+'>
-
-    <h2>Phone number</h2>
-    <p>Only numeric data can be used</p>
-    <label for="phoneNumber">Phone number:</label>
-    <input class="input" type="number" id="phoneNumber" data-testid="phoneNumberTestId" placeholder="8775048423"
-           maxlength="10">
-
-    <h2>Password section</h2>
-    <p>NB! Passwords should match</p>
-    <!--    Will also check that both passwords are similar-->
-    <label>Password:
-        <input class="input" name="password" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
-    <label>Confirm:
-        <input class="input" name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
-    <!--    Submit button, as part of form section - part of passwords validation as well-->
-    <button class="submit_button" onclick="successMessage()">Submit</button>
-    <p id="password_error_message">
+        <h2>Password section</h2>
+        <p>NB! Passwords should match</p>
+        <!--    Will also check that both passwords are similar-->
+        <p id="password_error_message" class="error_message">
             Passwords do not match!
-    </p>
-    <p id="input_error_message">
-        Mandatory input field is not valid or empty!
-    </p>
-    <div id="success_message">
-        <span class="close_button" onclick="this.parentElement.style.display='none';">&times;</span>
-        User successfully submitted registration
-    </div>
-</form>
+        </p>
+        <div class="flex-container">
+            <label>Password:
+                <input class="input" name="password" type="password" placeholder="Qwerty"/> </label><br/>
+            <label>Confirm:
+                <input class="input" name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+        </div>
+        <!--    Submit button, as part of form section - part of passwords validation as well-->
+        <button class="submit_button" onclick="successMessage()">Submit</button>
+        <p id="input_error_message" class="error_message">
+            Mandatory input field is not valid or empty!
+        </p>
+        <div id="success_message">
+            <span class="close_button" onclick="this.parentElement.style.display='none';">&times;</span>
+            User successfully submitted registration
+        </div>
+    </form>
+</div>
 </body>
 <script type="text/javascript">
 
@@ -105,10 +93,10 @@
         const password = document.querySelector('input[name=password]');
         const confirm = document.querySelector('input[name=confirm]');
         if (confirm.value === password.value) {
-            document.getElementById("input_error_message").style.display = "none"
+            document.getElementById("password_error_message").style.display = "none"
             console.log('Checked that passwords have same values - valid')
         } else {
-            document.getElementById("input_error_message").style.display = "block"
+            document.getElementById("password_error_message").style.display = "block"
             console.log('Passwords are different');
         }
     }
@@ -167,6 +155,18 @@
 
     input:focus:invalid {
         box-shadow: none;
+    }
+
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+
+    .error_message {
+        color: #df5000;
+        font: 1.2em "Fira Sans", sans-serif;
     }
 </style>
 </html>

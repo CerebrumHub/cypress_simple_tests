@@ -2,7 +2,6 @@ beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_1.html')
 })
 
-
 // Instructions for workshop #4:
 //
 // 1. Update the name of test suite by adding you name: “This is first test suite, John Smith”
@@ -13,14 +12,21 @@ beforeEach(() => {
 //      -then 2 password fields
 //      -then username
 // 5. Add comment to the first test containing today’s date
-
+/*
+Selecting elements:
+1.  By Class -
+ */
 
 describe('This is first test suite', () => {
-    it('User can submit data only when valid mandatory values are added', () => {
-        cy.get('#username').type('Tester 123')
-        cy.get('.phoneNumberTestId').type('555666777')
+    it.only('User can submit data only when valid mandatory values are added', () => {
+        cy.get('#username').type('Something')
+        cy.get('#firstName').type('John')
+        cy.get('#lastName').type('John')
+        cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
         cy.get('input[name="password"]').type('MyPass')
         cy.get('[name="confirm"]').type('MyPass')
+        cy.get('h2').contains('Password').click()
+        cy.get('.submit_button', { timeout: 10000 }).should('be.enabled');
         cy.get('.submit_button').click()
 
         // Assert that both input and password error messages are not shown
@@ -32,7 +38,7 @@ describe('This is first test suite', () => {
 
     it('User cannot submit data when username is absent', () => {
         // Checking form validation without making actions on form
-        cy.get('#form-validation').then(({$form}) => {
+        cy.get('#applicationForm').then(({$form}) => {
             expect($form[0].checkValidity()).to.be.false
         })
         cy.get('#form-validation :invalid').should('have.length', 1)
