@@ -5,25 +5,39 @@ beforeEach(() => {
 // Structure and visual tests before any actions
 describe('Section 1: Main elements on page are correct', () => {
     it('Check that logo is correct and has correct size', () => {
-        // Check log href
-        // Check log size
-        // Check logo location?
-    })
-
-    it('Check that URL to CH is correct and clickable', () => {
-        // CH URL is correct
-        // After clicking button request is correct
-        // After clicking correct page is loaded
-        // When clicked and incorrect CH url - check 404 page
+        cy.get('img').should('have.attr', 'src').should('include','cerebrum_hub_logo')
+        // get element and check its parameter height, to be equal 178
+        cy.get('img').invoke('height').should('be.lessThan', 178)
+            .and('be.greaterThan', 100)
     })
 
     it('Check navigation part', () => {
-        // Navigation bar has 2 elements - Registration form 1, CH homepage
-        // URL for registration form 1 is correct
-        // URL for CH homepage is correct
+        cy.get('nav').children().should('have.length', 2)
+        // Get navigation element, find siblings that contains h1 and check if it has Registration form in string
+        cy.get('nav').siblings('h1').should('have.text', 'Registration form number 2')
+        cy.get('nav').children().eq(0).should('be.visible')
+            .and('have.attr', 'href', 'registration_form_1.html')
+            .click()
+        // Check that currently opened URL is value:
+        cy.url().should('contain','/registration_form_1.html')
+        // Visit previous page
+        cy.go('back')
+        cy.log('Back again in registration form 2')
+        cy.get('nav').children().eq(1).should('have.attr', 'href', 'https://cerebrumhub.com/')
+    })
+
+    it('Check that URL to CH is correct and clickable', () => {
+        cy.get('nav').children().then(options => {
+            const actual = [...options].map(option => option.innerText)
+            expect(actual).to.deep.eq(['Registration form 1', 'Cerebrum Hub homepage'])
+        })
+        cy.get('nav').children().eq(1).should('be.visible')
+            .and('have.attr', 'href', 'https://cerebrumhub.com/')
     })
 
     it('Check CSS text has correct values', () => {
+        cy.get('#username').type(' ')
+        cy.get('#username').should('have.css', 'box-shadow', '0 0 5px 1px red')
         // input error show red boarder
         // headers has blue text
     })
