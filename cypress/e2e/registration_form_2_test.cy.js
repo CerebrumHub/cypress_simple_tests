@@ -95,13 +95,20 @@ describe('Section 1: Main elements on page are correct', () => {
 
     it('Check what list of cars can be selected', () => {
         // Using 2 classes in chain to select checkboxes of vehicles
-        cy.get('.checkbox.vehicles').should('have.length',3)
-        cy.get('.checkbox.vehicles').eq(0).should('have.text', 'I have a bike').and('not.be.checked')
+        cy.get('.checkbox.vehicles').should('have.length', 3)
+        // .next can select simply next element in DOM
+        cy.get('.checkbox.vehicles').eq(0).next().should('have.text', 'I have a bike').and('not.be.checked')
     })
 })
 
 describe('Section 2: Input fields support only correct patterns', () => {
-    it.only('Check that email has pattern check', () => {
+    it('User can submit form with valid data', ()=>{
+        inputValidData(true, true)
+        cy.get('.submit_button', {timeout: 10000}).should('be.enabled');
+        cy.get('.submit_button').click()
+    })
+
+    it('Check that email has pattern check', () => {
         // Check supported format
         cy.get('#email').should(($input) => {
             const emailPattern = $input.get(0).attributes.getNamedItem('pattern').value
@@ -122,27 +129,57 @@ describe('Section 2: Input fields support only correct patterns', () => {
     })
 
     it('Check date input', () => {
+        const today = new Date().toLocaleDateString('en-ca')
         // By default, date should be empty
+        // scrollIntoView will scroll page to current element
         // Assert format that this input can get mm/ dd/ yyyy
         // Assert that birthday can be only with past dates, or today
+        cy.get('#birthday').scrollIntoView().should('have.value', '')
+            .and('have.attr', 'type', 'date')
+            .and('have.attr', 'max', `${today}`)
     })
 
     it('Check what fields are mandatory', () => {
         // Assert that mandatory list on input fields is correct
+        cy.get("input").should('have.attr', 'required')
     })
 
-    it('Check that submit button can be selected only with mandatory values', () => {
+    it.only('Check that submit button cannot be selected if username is empty', () => {
         // Submit button by default is disabled and cannot be clicked
+        cy.get('button[class="submit_button"]').should('be.disabled')
         // If one of mandatory fields show error - submit button is disable
+        inputValidData(false, true)
+        cy.get('button[class="submit_button"]').should('be.disabled')
+    })
+
+    it.only('Check that submit button cannot be selected if username is empty', () => {
         // If passwords are different - submit button is disabled
-        // When all fields are correct - submit button is show and clickable
-        // Clicking submit button will show success message
+        inputValidData(true, false)
+        cy.get('[name="confirm"]').type('else')
+        cy.get('button[class="submit_button"]').should('be.disabled')
+        cy.get('#password_error_message').should('be.visible')
     })
 })
 
-describe('Section 5: Submitting form', () => {
-    it('Check that on URL click request send is correct? - advanced', () => {
-        // Something here
-    })
-})
+function inputValidData(usernameFilled, validPassword) {
+    if (usernameFilled){
+        cy.log('Username will be filled')
+        cy.get('#username').type('Something')
+    } else {
+        cy.log('Username will be ignored')
+    }
+    cy.get('#email').type('validemail@yeap.com')
+    cy.get('#firstName').type('John')
+    cy.get('#lastName').type('Doe')
+    cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
+    // Birtday can show one placeholder, but pattern to input is YYYY-MM-DD
+    cy.get('#birthday').type('2022-02-01')
+    cy.get('input[name="password"]').type('MyPass')
+    if (validPassword){
+        cy.get('[name="confirm"]').type('MyPass')
+    } else {
+        cy.get('[name="confirm"]').type('InvalidMyPass')
+    }
+    cy.get('h2').contains('Password').click()
+}
 

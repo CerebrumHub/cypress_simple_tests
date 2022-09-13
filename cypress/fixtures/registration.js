@@ -24,10 +24,10 @@ function onChange() {
     const password = document.querySelector('input[name=password]');
     const confirm = document.querySelector('input[name=confirm]');
     if (confirm.value === password.value) {
-        document.getElementById("input_error_message").style.display = "none"
+        document.getElementById("password_error_message").style.display = "none"
         console.log('Checked that passwords have same values - valid')
     } else {
-        document.getElementById("input_error_message").style.display = "block"
+        document.getElementById("password_error_message").style.display = "block"
         console.log('Passwords are different');
     }
 }
@@ -38,7 +38,10 @@ Array.from(document.getElementsByTagName("input")).forEach(function (inputField)
 
 function stateHandle() {
     // Will check if all class .input fields
-    if (document.querySelectorAll(".input:placeholder-shown").length === 0) {
+    const password = document.querySelector('input[name=password]');
+    const confirm = document.querySelector('input[name=confirm]');
+
+    if (document.querySelectorAll(".input:placeholder-shown").length === 0 && confirm.value === password.value) {
         submit_button.disabled = false; //button is enabled
         console.log('Submit button will be enabled')
     } else {

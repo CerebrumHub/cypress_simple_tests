@@ -107,7 +107,10 @@
 
     function stateHandle() {
         // Will check if all class .input fields
-        if (document.querySelectorAll(".input:placeholder-shown").length === 0) {
+        const password = document.querySelector('input[name=password]');
+        const confirm = document.querySelector('input[name=confirm]');
+
+        if (document.querySelectorAll(".input:placeholder-shown").length === 0 && confirm.value === password.value) {
             submit_button.disabled = false; //button is enabled
             console.log('Submit button will be enabled')
         } else {

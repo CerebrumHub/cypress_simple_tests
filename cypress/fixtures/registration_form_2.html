@@ -125,15 +125,15 @@
     <p>NB! Passwords should match</p>
     <!--    Will also check that both passwords are similar-->
     <label>Password:
-        <input class="input" name="password" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+        <input class="input" name="password" type="password" placeholder="Qwerty"/> </label><br/>
     <label>Confirm:
         <input class="input" name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
     <!--    Submit button, as part of form section - part of passwords validation as well-->
     <button class="submit_button" onclick="successMessage()">Submit</button>
-    <p id="password_error_message">
+    <p id="password_error_message" class="error_message">
         Passwords do not match!
     </p>
-    <p id="input_error_message">
+    <p id="input_error_message" class="error_message">
         Mandatory input field is not valid or empty!
     </p>
     <div id="success_message">
