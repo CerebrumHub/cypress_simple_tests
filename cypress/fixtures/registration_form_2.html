@@ -54,9 +54,9 @@
     <label for="username">Username:</label>
 
     <!--Max length and placeholder-->
-    <input class="input" type="text" id="username" name="username" placeholder="Frank Abagnale" min="1" max="50"
+    <input class="input" type="text" id="username" name="username" placeholder="John01" min="1" max="50"
            required
-           onchange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]*'>
+           onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+'>
     <h3>Input email</h3>
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" placeholder="aurevoir@ipanema.ee" maxlength="50"
