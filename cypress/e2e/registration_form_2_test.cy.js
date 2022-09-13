@@ -144,7 +144,7 @@ describe('Section 2: Input fields support only correct patterns', () => {
         cy.get("input").should('have.attr', 'required')
     })
 
-    it.only('Check that submit button cannot be selected if username is empty', () => {
+    it('Check that submit button cannot be selected if username is empty', () => {
         // Submit button by default is disabled and cannot be clicked
         cy.get('button[class="submit_button"]').should('be.disabled')
         // If one of mandatory fields show error - submit button is disable
@@ -152,7 +152,7 @@ describe('Section 2: Input fields support only correct patterns', () => {
         cy.get('button[class="submit_button"]').should('be.disabled')
     })
 
-    it.only('Check that submit button cannot be selected if username is empty', () => {
+    it('Check that submit button cannot be selected if username is empty', () => {
         // If passwords are different - submit button is disabled
         inputValidData(true, false)
         cy.get('[name="confirm"]').type('else')
