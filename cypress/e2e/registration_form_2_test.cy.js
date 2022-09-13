@@ -7,6 +7,7 @@ beforeEach(() => {
 // Structure and visual tests before any actions
 describe('Section 1: Main elements on page are correct', () => {
     it('Check that logo is correct and has correct size', () => {
+        cy.log('Will check logo source and size')
         cy.get('img').should('have.attr', 'src').should('include', 'cerebrum_hub_logo')
         // get element and check its parameter height, to be equal 178
         cy.get('img').invoke('height').should('be.lessThan', 178)
@@ -64,7 +65,7 @@ describe('Section 1: Main elements on page are correct', () => {
         })
     })
 
-    it.only('Check what list of options is present for Radio buttons', () => {
+    it('Check what list of options is present for Radio buttons', () => {
         // List of elements in radio button section is correct
         /*
         First get all input - radio buttons,
@@ -93,18 +94,31 @@ describe('Section 1: Main elements on page are correct', () => {
     })
 
     it('Check what list of cars can be selected', () => {
-        // Check list of checkbox elements
+        // Using 2 classes in chain to select checkboxes of vehicles
+        cy.get('.checkbox.vehicles').should('have.length',3)
+        cy.get('.checkbox.vehicles').eq(0).should('have.text', 'I have a bike').and('not.be.checked')
     })
 })
 
 describe('Section 2: Input fields support only correct patterns', () => {
-    it('Check that email has pattern check', () => {
+    it.only('Check that email has pattern check', () => {
+        // Check supported format
+        cy.get('#email').should(($input) => {
+            const emailPattern = $input.get(0).attributes.getNamedItem('pattern').value
+            expect(emailPattern).contains('@', 'Pattern should contain @')
+            console.log('Email pattern: ' + `${emailPattern}`)
+        })
         // Input invalid email
-        // Assert that email show error tooltip
-        // Assert that error message is visible
-        // Input valid email
-        // No tooltip is present, error is not visible
-        // Email should have limitations 1 - up to max length
+        cy.get('#email').type('wrongemail.com').invoke('prop', 'validationMessage').should('contain', '@')
+            .and('contain', 'email')
+        cy.get('h2').contains('Input username').click()
+        cy.get('#email').should('have.css', 'box-shadow').should('contain', 'rgb(255, 0, 0)')
+
+        // Don't forget that previous state of test should be cleared
+        cy.get('#email').clear()
+        cy.get('#email').type('validemail@yeap.com')
+        cy.get('h2').contains('Input username').click()
+        cy.get('#email').should('have.css', 'box-shadow').should('not.contain', 'rgb(255, 0, 0)')
     })
 
     it('Check date input', () => {
