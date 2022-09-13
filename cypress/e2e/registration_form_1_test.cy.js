@@ -1,3 +1,6 @@
+// Same functions can be used for both registration_form_1 and 2 tests
+// import {applicationFormWithInvalidUsername, inputPasswords} from "../support/reusable_functions";
+
 beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_1.html')
 })

@@ -1,3 +1,5 @@
+import {applicationFormWithInvalidUsername, inputPasswords} from "../support/reusable_functions";
+
 beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_2.html')
 })
@@ -5,7 +7,7 @@ beforeEach(() => {
 // Structure and visual tests before any actions
 describe('Section 1: Main elements on page are correct', () => {
     it('Check that logo is correct and has correct size', () => {
-        cy.get('img').should('have.attr', 'src').should('include','cerebrum_hub_logo')
+        cy.get('img').should('have.attr', 'src').should('include', 'cerebrum_hub_logo')
         // get element and check its parameter height, to be equal 178
         cy.get('img').invoke('height').should('be.lessThan', 178)
             .and('be.greaterThan', 100)
@@ -19,7 +21,7 @@ describe('Section 1: Main elements on page are correct', () => {
             .and('have.attr', 'href', 'registration_form_1.html')
             .click()
         // Check that currently opened URL is value:
-        cy.url().should('contain','/registration_form_1.html')
+        cy.url().should('contain', '/registration_form_1.html')
         // Visit previous page
         cy.go('back')
         cy.log('Back again in registration form 2')
@@ -37,29 +39,66 @@ describe('Section 1: Main elements on page are correct', () => {
 
     it('Check CSS text has correct values', () => {
         cy.get('#username').type(' ')
-        cy.get('#username').should('have.css', 'box-shadow', '0 0 5px 1px red')
-        // input error show red boarder
-        // headers has blue text
+        cy.get('h2').contains('Input username').click()
+        // Get username field CSS with value box-shadow and check that this value contains red(RGB) value
+        cy.get('#username').should('have.css', 'box-shadow').should('contain', 'rgb(255, 0, 0)')
+        // By default, Cypress support only RGB values. HEX and other formats will need chai-colors
+        cy.get('[data-testid="userInput"]').should('have.css', 'color', 'rgb(0, 0, 255)')
     })
 
     it('Application show error when input is invalid', () => {
-        // empty fields - assert has boarder
-        // empty fields - show correct tooltip
-        // check list of html elements that should be mandatory and has required attribute
+        applicationFormWithInvalidUsername('{backspace}', 'Please fill out this field.', 6)
+        cy.window().scrollTo('bottom')
+        cy.get('.submit_button').should('be.disabled')
+        cy.get('#success_message').should('have.css', 'display', 'none')
+
+        cy.window().scrollTo('top')
+        // Phone number is added in previous applicationFormWithInvalidUsername, that why number of invalid fields changed from 6 to 5
+        applicationFormWithInvalidUsername(' ', 'Please match the requested format.', 5)
+        cy.window().scrollTo('bottom')
+        cy.get('.submit_button').should('be.disabled')
+        cy.get('#input_error_message').should('have.css', 'display', 'block')
+        cy.get('#success_message').should('have.css', 'display', 'none')
+        cy.get('input').then(options => {
+            expect(options).to.have.attr('required')
+        })
     })
 
-    it('Check what list of options is present for Radio buttons', ()=>{
+    it.only('Check what list of options is present for Radio buttons', () => {
         // List of elements in radio button section is correct
+        /*
+        First get all input - radio buttons,
+        then get all siblings - different 15 elements, then we should get more specific by using Regular Expression:
+        ^ - starts with
+        $ - end with
+        our example: label[for= that ends with FavLanguage]
+        in html:
+        <label for="htmlFavLanguage">HTML</label> ...
+        <label for="cssFavLanguage">CSS</label> ...
+
+        .then list of radioButtonsLabels should be parsed with [...array]
+        .map(each element of parsed array => get innerText of this single element from ...array
+        now expect et anywhere in this single element one of [HTML, CSS or JavaScript] is present
+         */
+        const featuresSelector = 'label[for$="FavLanguage"]';
+
+        cy.get('input[type="radio"]').siblings(`${featuresSelector}`).then(labelsOfRadioButtons => {
+            console.log('Here will be radio buttons:' + `${labelsOfRadioButtons}`)
+            const actual = [...labelsOfRadioButtons].map(singleRadioButtonLabel => singleRadioButtonLabel.innerText)
+            expect(actual).to.deep.eq(['HTML', 'CSS', 'JavaScript'])
+        })
         // Selecting one will remove selection from other radio button
+        cy.get('input[type="radio"]').eq(0).check().should('be.checked')
+        cy.get('input[type="radio"]').eq(1).should('not.be.checked')
     })
 
-    it('Check what list of cars can be selected', ()=>{
+    it('Check what list of cars can be selected', () => {
         // Check list of checkbox elements
     })
 })
 
-describe('Section 2: Input fields support only correct patterns', ()=>{
-    it('Check that email has pattern check', ()=>{
+describe('Section 2: Input fields support only correct patterns', () => {
+    it('Check that email has pattern check', () => {
         // Input invalid email
         // Assert that email show error tooltip
         // Assert that error message is visible
@@ -68,17 +107,17 @@ describe('Section 2: Input fields support only correct patterns', ()=>{
         // Email should have limitations 1 - up to max length
     })
 
-    it('Check date input', ()=>{
+    it('Check date input', () => {
         // By default, date should be empty
         // Assert format that this input can get mm/ dd/ yyyy
         // Assert that birthday can be only with past dates, or today
     })
 
-    it('Check what fields are mandatory', ()=>{
+    it('Check what fields are mandatory', () => {
         // Assert that mandatory list on input fields is correct
     })
 
-    it('Check that submit button can be selected only with mandatory values', ()=>{
+    it('Check that submit button can be selected only with mandatory values', () => {
         // Submit button by default is disabled and cannot be clicked
         // If one of mandatory fields show error - submit button is disable
         // If passwords are different - submit button is disabled
@@ -87,8 +126,8 @@ describe('Section 2: Input fields support only correct patterns', ()=>{
     })
 })
 
-describe('Section 5: Submitting form', ()=>{
-    it('Check that on URL click request send is correct? - advanced', ()=>{
+describe('Section 5: Submitting form', () => {
+    it('Check that on URL click request send is correct? - advanced', () => {
         // Something here
     })
 })

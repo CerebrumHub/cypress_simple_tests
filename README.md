@@ -9,6 +9,8 @@ NodeJS and npm installed
 Current tests were developed on Ubuntu 20.04LTS using:
 `node version 17.9.0` and `npm version 8.5.5`
 All browsers where tests should be executed must be installed separately, Cypress only has Electron in package.
+
+### Allure reporting requirements
 (Allure binary or npm installed Allure)[https://github.com/Shelex/cypress-allure-plugin]
 Java 8 - prerequisite to use Allure binary
 
@@ -66,3 +68,6 @@ High level project structure starting from /cypress:
 * fixtures - HTML, CSS and JavaScript files used as tested code
 
 cypress.config.js - here are all cypress configurations. They will overwrite default ones, and can also be seen in Cypress IDE
+
+Known Cypress limitations:
+* have.css is limited by default to only rgb color scheme. Hex and other formats can be added with [chai-colors assertion plugin](https://stackoverflow.com/questions/66438459/is-there-a-way-to-make-check-on-hex-color-cypress)
