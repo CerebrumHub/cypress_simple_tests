@@ -1,5 +1,7 @@
 /node_modules
 .idea
+.vs/
+cypress_simple_tests/.vs
 /allure-report
 /allure-results
 /cypress/videos/*.mp4
