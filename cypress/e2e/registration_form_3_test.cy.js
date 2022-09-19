@@ -1,12 +1,12 @@
-// JQuery example tests
-// Stub requests - what will happen with 404 error
-// Stub requests - change
-// Load file example
-// Multiple selection
+beforeEach(() => {
+    cy.visit('cypress/fixtures/registration_form_3.html')
+})
+//Workshop #8 add visual tests for registration form 3
 
-describe.skip('This is first test suite', ()=> {
-    it.skip('Test case description', () => {
+describe('Section 1: visual tests', ()=> {
+    it('This is my first test', () => {
         // This is empty template
-        // When everything ready to be executed delete .skip and then execute test
     });
+
+//Workshop #9 add functional tests for registration form 3
 })
