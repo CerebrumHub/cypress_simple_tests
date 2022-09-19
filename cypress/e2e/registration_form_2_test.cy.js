@@ -78,9 +78,10 @@ describe('Section 2: Visual tests', () => {
         // There are totally 3 such elements
         cy.get('input[type="radio"]').should('have.length', 3)
 
-        cy.get('input[type="radio"]').eq(0).should('have.text','HTML').and('not.be.checked')
-        cy.get('input[type="radio"]').eq(1).should('have.text','CSS').and('not.be.checked')
-        cy.get('input[type="radio"]').eq(2).should('have.text','JavaScript').and('not.be.checked')
+        // next() takes next element from the HTML
+        cy.get('input[type="radio"]').eq(0).next().should('have.text','HTML').and('not.be.checked')
+        cy.get('input[type="radio"]').eq(1).next().should('have.text','CSS').and('not.be.checked')
+        cy.get('input[type="radio"]').eq(2).next().should('have.text','JavaScript').and('not.be.checked')
 
         // Selecting one will remove selection from other radio button
         cy.get('input[type="radio"]').eq(0).check().should('be.checked')
