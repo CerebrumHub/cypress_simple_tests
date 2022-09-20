@@ -6,13 +6,13 @@ beforeEach(() => {
 
 describe('Section 1: Functional tests', () => {
     it('User can submit form with valid data and only mandatory fields added', ()=>{
-        // Add test steps for filling in only mandatory fields
+        // Add test steps for filling in ONLY mandatory fields
         // Assert that submit button is enabled
         // Assert that after submitting the form system show successful message
     })
 
     it('User can submit form with all fields added', ()=>{
-        // Add test steps for filling in all fields
+        // Add test steps for filling in ALL fields
         // Assert that submit button is enabled
         // Assert that after submitting the form system show successful message
     })
@@ -25,7 +25,7 @@ describe('Section 1: Functional tests', () => {
         // Assert that error message is visible
     })
 
-    it('Check that submit button cannot be selected if username is empty', () => {
+    it.only('Check that submit button cannot be selected if username is empty', () => {
         // Submit button by default is disabled and cannot be clicked
         cy.get('button[class="submit_button"]').should('be.disabled')
 
@@ -45,7 +45,7 @@ describe('Section 1: Functional tests', () => {
 // Workshop #7 create more visual tests
 
 describe('Section 2: Visual tests', () => {
-    it('Check that logo is correct and has correct size', () => {
+    it.only('Check that logo is correct and has correct size', () => {
         cy.log('Will check logo source and size')
         cy.get('img').should('have.attr', 'src').should('include', 'cerebrum_hub_logo')
         // get element and check its parameter height, to be equal 178
@@ -75,7 +75,7 @@ describe('Section 2: Visual tests', () => {
     })
 
     it('Check that radio button list is correct', () => {
-        // There are totally 3 such elements
+        // Array has totally 3 elements
         cy.get('input[type="radio"]').should('have.length', 3)
 
         cy.get('input[type="radio"]').eq(0).should('have.text','HTML').and('not.be.checked')
@@ -93,10 +93,10 @@ describe('Section 2: Visual tests', () => {
     })
 
     it('Car dropdown is correct', () => {
-        //TODO Add test for verification car dropdown (size) and its contents
+        //Add test for verification car dropdown (size) and its contents
     })
 
-    it('Education dropdown is correct', () => {
+    it('Favourite animal dropdown is correct', () => {
         // Create test similar to previous one
     })
 })
@@ -108,9 +108,6 @@ function inputValidData() {
     cy.get('#firstName').type('John')
     cy.get('#lastName').type('Doe')
     cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-
-    // Birtday can show one placeholder, but pattern to input is YYYY-MM-DD
-    cy.get('#birthday').type('2022-02-01')
     cy.get('input[name="password"]').type('MyPass')
     cy.get('[name="confirm"]').type('MyPass')
     cy.get('[name="confirm"]').type('InvalidMyPass')

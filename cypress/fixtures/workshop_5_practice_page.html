@@ -5,36 +5,30 @@
 </head>
 <body>
 <h1>Registration form number 1</h1>
-<nav>Home</nav>
-<nav>Contacts</nav>
 <div>
     <div>
         <p>This is simple registration form</p>
     </div>
 </div>
-<img src="cerebrum_hub_logo.png" width="178" height="166" alt="cerebrum_hub_logo">
-<a href="https://cerebrumhub.com/">Cerebrum Hub homepage</a>
-<div class="flex-container">
     <form id="applicationForm">
         <h2>Input username</h2>
         <p>Username string should consist only of alphabetic and numeric characters</p>
         <label for="username">Username:</label>
         <input class="input" type="text" id="username" name="username" placeholder="John01" min="1" max="50"
                required
-               onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+' title="Please add username">
+               onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+'>
 
         <h2>First name</h2>
         <p>Please enter your first name</p>
         <label for="firstName">First name:</label>
         <input type="text" id="firstName" name="firstName" placeholder="John" max="50"
-               onChange="checkInputPattern('firstName')" pattern='[a-zA-Z]*'>
+               onChange="checkInputPattern('firstName')" pattern='[a-zA-Z]+'>
 
         <h2>Last name</h2>
         <p>Please enter your last name</p>
         <label for="lastName">Last name:</label>
-        <input type="text" data-testid="lastNameTestId" id="lastName" name="lastName" placeholder="Smith" min="1"
-               max="30"
-               onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]*'>
+        <input type="text" data-testid="lastNameTestId" id="lastName" name="lastName" placeholder="Smith" min="1" max="30"
+               onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]+'>
 
         <h2>Phone number</h2>
         <p>Only numeric data can be used</p>
@@ -52,8 +46,7 @@
             <label>Password:
                 <input class="input" name="password" type="password" placeholder="Qwerty"/> </label><br/>
             <label>Confirm:
-                <input class="input" name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/>
-            </label><br/>
+                <input class="input" name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
         </div>
         <!--    Submit button, as part of form section - part of passwords validation as well-->
         <button class="submit_button" onclick="successMessage()">Submit</button>
@@ -65,7 +58,6 @@
             User successfully submitted registration
         </div>
     </form>
-</div>
 </body>
 <script type="text/javascript">
 
@@ -85,9 +77,7 @@
             document.getElementById("input_error_message").style.display = "none"
             console.log('Input field has valid characters')
         } else {
-            submit_button.disabled = true; //submit_button remains disabled
             document.getElementById("input_error_message").style.display = "block"
-            element.setAttribute('title', 'Input field contains not supported character')
             console.log('Input field has invalid character');
         }
     }
@@ -101,7 +91,6 @@
             console.log('Checked that passwords have same values - valid')
         } else {
             document.getElementById("password_error_message").style.display = "block"
-            confirm.setAttribute('title', 'Both passwords should match')
             console.log('Passwords are different');
         }
     }
@@ -115,8 +104,7 @@
         const password = document.querySelector('input[name=password]');
         const confirm = document.querySelector('input[name=confirm]');
 
-        if (document.getElementById('username').value.indexOf(' ') == -1
-            && confirm.value === password.value && document.querySelectorAll(".input:placeholder-shown").length === 0) {
+        if (document.querySelectorAll(".input:placeholder-shown").length === 0 && confirm.value === password.value) {
             submit_button.disabled = false; //button is enabled
             console.log('Submit button will be enabled')
         } else {
@@ -141,7 +129,7 @@
         submitTimer = setTimeout(() => {
             this.submit()
             console.log('Submitted after 5 seconds')
-        }, 10000)
+        }, 2000)
     }
 
     function cancel() {
@@ -150,32 +138,4 @@
     }
 
 </script>
-
-<style>
-    /*Here will be CSS*/
-    h2 {
-        color: blue;
-        font-weight: normal;
-    }
-
-    input:invalid {
-        box-shadow: 0 0 5px 1px red;
-    }
-
-    input:focus:invalid {
-        box-shadow: none;
-    }
-
-    .flex-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-    }
-
-    .error_message {
-        color: #df5000;
-        font: 1.2em "Fira Sans", sans-serif;
-    }
-</style>
 </html>

@@ -1,0 +1,10 @@
+/*
+functions
+array
+methods
+const
+if statement
+DOM
+
+
+ */

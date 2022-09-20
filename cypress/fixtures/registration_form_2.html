@@ -56,7 +56,7 @@
     <!--Max length and placeholder-->
     <input class="input" type="text" id="username" name="username" placeholder="John01" min="1" max="50"
            required
-           onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+'>
+           onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+' title="Please add username">
     <h3>Input email</h3>
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" placeholder="aurevoir@ipanema.ee" maxlength="50"
@@ -105,11 +105,6 @@
     <input class="checkbox vehicles" type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
     <label for="vehicle3">I have a boat</label><br><br>
 
-    <h2>Birthday</h2>
-    <p>Mandatory field that is set as required</p>
-    <label for="birthday">Birthday:</label>
-    <input type="date" id="birthday" name="birthday" required>
-
     <h2>Select a car</h2>
     <p>This section is simply to check functionality, simply chose one brand from the list</p>
     <label for="cars">Choose a car:</label>
@@ -118,6 +113,14 @@
         <option value="saab">Saab</option>
         <option value="opel">Opel</option>
         <option value="audi">Audi</option>
+    </select>
+
+    <h2>Select your favourite animal</h2>
+    <select name="animal" id="animal">
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="snake">Snake</option>
+        <option value="hippo">Hippo</option>
     </select>
     <br><br>
 
