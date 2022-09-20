@@ -25,7 +25,7 @@ describe('Section 1: Functional tests', () => {
         // Assert that error message is visible
     })
 
-    it.only('Check that submit button cannot be selected if username is empty', () => {
+    it('Check that submit button cannot be selected if username is empty', () => {
         // Submit button by default is disabled and cannot be clicked
         cy.get('button[class="submit_button"]').should('be.disabled')
 
@@ -45,7 +45,7 @@ describe('Section 1: Functional tests', () => {
 // Workshop #7 create more visual tests
 
 describe('Section 2: Visual tests', () => {
-    it.only('Check that logo is correct and has correct size', () => {
+    it('Check that logo is correct and has correct size', () => {
         cy.log('Will check logo source and size')
         cy.get('img').should('have.attr', 'src').should('include', 'cerebrum_hub_logo')
         // get element and check its parameter height, to be equal 178
@@ -75,12 +75,17 @@ describe('Section 2: Visual tests', () => {
     })
 
     it('Check that radio button list is correct', () => {
-        // Array has totally 3 elements
-        cy.get('input[type="radio"]').should('have.length', 3)
-
-        cy.get('input[type="radio"]').eq(0).should('have.text','HTML').and('not.be.checked')
-        cy.get('input[type="radio"]').eq(1).should('have.text','CSS').and('not.be.checked')
-        cy.get('input[type="radio"]').eq(2).should('have.text','JavaScript').and('not.be.checked')
+        // Array has totally 4 elements
+        cy.get('input[type="radio"]').should('have.length', 4)
+        /*
+        .next() is needed because of HTML structure:
+        <input type="radio" id="htmlFavLanguage" name="fav_language" value="HTML">
+        <label for="htmlFavLanguage">HTML</label><br>
+         */
+        cy.get('input[type="radio"]').next().eq(0).should('have.text','HTML').and('not.be.checked')
+        cy.get('input[type="radio"]').next().eq(1).should('have.text','CSS').and('not.be.checked')
+        cy.get('input[type="radio"]').next().eq(2).should('have.text','JavaScript').and('not.be.checked')
+        cy.get('input[type="radio"]').next().eq(3).should('have.text','PHP').and('not.be.checked')
 
         // Selecting one will remove selection from other radio button
         cy.get('input[type="radio"]').eq(0).check().should('be.checked')
@@ -93,7 +98,9 @@ describe('Section 2: Visual tests', () => {
     })
 
     it('Car dropdown is correct', () => {
-        //Add test for verification car dropdown (size) and its contents
+        // Different solutions how get array length of elements in Cars dropdown
+        cy.get('#cars').children().should('have.length', 4)
+        cy.get('#cars').find('option').should('have.length', 4)
     })
 
     it('Favourite animal dropdown is correct', () => {
@@ -108,8 +115,10 @@ function inputValidData() {
     cy.get('#firstName').type('John')
     cy.get('#lastName').type('Doe')
     cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-    cy.get('input[name="password"]').type('MyPass')
-    cy.get('[name="confirm"]').type('MyPass')
+    // If element has multiple classes, then one of them can be used
+    cy.get('.password').type('MyPass')
+    // To get multiple classes user .class1.class2 selector
+    cy.get('.input.confirm').type('MyPass')
     cy.get('[name="confirm"]').type('InvalidMyPass')
     cy.get('h2').contains('Password').click()
 }

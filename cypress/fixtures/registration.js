@@ -14,6 +14,7 @@ function checkInputPattern(naming) {
         document.getElementById("input_error_message").style.display = "none"
         console.log('Input field has valid characters')
     } else {
+        submit_button.disabled = true; //submit_button remains disabled
         document.getElementById("input_error_message").style.display = "block"
         element.setAttribute('title', 'Input field contains not supported character')
         console.log('Input field has invalid character');
@@ -43,7 +44,8 @@ function stateHandle() {
     const password = document.querySelector('input[name=password]');
     const confirm = document.querySelector('input[name=confirm]');
 
-    if (document.querySelectorAll(".input:placeholder-shown").length === 0 && confirm.value === password.value) {
+    if (document.getElementById('username').value.indexOf(' ') == -1
+        && confirm.value === password.value && document.querySelectorAll(".input:placeholder-shown").length === 0) {
         submit_button.disabled = false; //button is enabled
         console.log('Submit button will be enabled')
     } else {
