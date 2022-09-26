@@ -6,13 +6,13 @@ beforeEach(() => {
 
 describe('Section 1: Functional tests', () => {
     it('User can submit form with valid data and only mandatory fields added', ()=>{
-        // Add test steps for filling in only mandatory fields
+        // Add test steps for filling in ONLY mandatory fields
         // Assert that submit button is enabled
         // Assert that after submitting the form system show successful message
     })
 
     it('User can submit form with all fields added', ()=>{
-        // Add test steps for filling in all fields
+        // Add test steps for filling in ALL fields
         // Assert that submit button is enabled
         // Assert that after submitting the form system show successful message
     })
@@ -75,13 +75,17 @@ describe('Section 2: Visual tests', () => {
     })
 
     it('Check that radio button list is correct', () => {
-        // There are totally 3 such elements
-        cy.get('input[type="radio"]').should('have.length', 3)
-
-        // next() takes next element from the HTML
-        cy.get('input[type="radio"]').eq(0).next().should('have.text','HTML').and('not.be.checked')
-        cy.get('input[type="radio"]').eq(1).next().should('have.text','CSS').and('not.be.checked')
-        cy.get('input[type="radio"]').eq(2).next().should('have.text','JavaScript').and('not.be.checked')
+        // Array has totally 4 elements
+        cy.get('input[type="radio"]').should('have.length', 4)
+        /*
+        .next() is needed because of HTML structure:
+        <input type="radio" id="htmlFavLanguage" name="fav_language" value="HTML">
+        <label for="htmlFavLanguage">HTML</label><br>
+         */
+        cy.get('input[type="radio"]').next().eq(0).should('have.text','HTML').and('not.be.checked')
+        cy.get('input[type="radio"]').next().eq(1).should('have.text','CSS').and('not.be.checked')
+        cy.get('input[type="radio"]').next().eq(2).should('have.text','JavaScript').and('not.be.checked')
+        cy.get('input[type="radio"]').next().eq(3).should('have.text','PHP').and('not.be.checked')
 
         // Selecting one will remove selection from other radio button
         cy.get('input[type="radio"]').eq(0).check().should('be.checked')
@@ -94,10 +98,12 @@ describe('Section 2: Visual tests', () => {
     })
 
     it('Car dropdown is correct', () => {
-        //TODO Add test for verification car dropdown (size) and its contents
+        // Different solutions how get array length of elements in Cars dropdown
+        cy.get('#cars').children().should('have.length', 4)
+        cy.get('#cars').find('option').should('have.length', 4)
     })
 
-    it('Education dropdown is correct', () => {
+    it('Favourite animal dropdown is correct', () => {
         // Create test similar to previous one
     })
 })
@@ -109,11 +115,10 @@ function inputValidData() {
     cy.get('#firstName').type('John')
     cy.get('#lastName').type('Doe')
     cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-
-    // Birtday can show one placeholder, but pattern to input is YYYY-MM-DD
-    cy.get('#birthday').type('2022-02-01')
-    cy.get('input[name="password"]').type('MyPass')
-    cy.get('[name="confirm"]').type('MyPass')
+    // If element has multiple classes, then one of them can be used
+    cy.get('.password').type('MyPass')
+    // To get multiple classes user .class1.class2 selector
+    cy.get('.input.confirm').type('MyPass')
     cy.get('[name="confirm"]').type('InvalidMyPass')
     cy.get('h2').contains('Password').click()
 }

@@ -16,6 +16,7 @@
 </div>
 <p>This is <span>simple</span> registration form</p>
 <img id="logo" src="cerebrum_hub_logo.png" width="178" height="166" alt="cerebrum_hub_logo">
+<img data-cy="cypress_logo" src="cypress_logo.png" width="116" height="88" alt="cerebrum_hub_logo">
 
 <!--Table-->
 <table>
@@ -56,7 +57,7 @@
     <!--Max length and placeholder-->
     <input class="input" type="text" id="username" name="username" placeholder="John01" min="1" max="50"
            required
-           onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+'>
+           onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+' title="Please add username">
     <h3>Input email</h3>
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" placeholder="aurevoir@ipanema.ee" maxlength="50"
@@ -94,6 +95,8 @@
     <label for="cssFavLanguage">CSS</label><br>
     <input type="radio" id="javascriptFavLanguage" name="fav_language" value="JavaScript">
     <label for="javascriptFavLanguage">JavaScript</label>
+    <input type="radio" id="phpFavLanguage" name="fav_language" value="php">
+    <label for="phpFavLanguage">PHP</label>
 
     <!--Checkboxes section-->
     <h2>Your favourite transport</h2>
@@ -105,11 +108,6 @@
     <input class="checkbox vehicles" type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
     <label for="vehicle3">I have a boat</label><br><br>
 
-    <h2>Birthday</h2>
-    <p>Mandatory field that is set as required</p>
-    <label for="birthday">Birthday:</label>
-    <input type="date" id="birthday" name="birthday" required>
-
     <h2>Select a car</h2>
     <p>This section is simply to check functionality, simply chose one brand from the list</p>
     <label for="cars">Choose a car:</label>
@@ -119,15 +117,23 @@
         <option value="opel">Opel</option>
         <option value="audi">Audi</option>
     </select>
+
+    <h2>Select your favourite animal</h2>
+    <select name="animal" id="animal">
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="snake">Snake</option>
+        <option value="hippo">Hippo</option>
+    </select>
     <br><br>
 
     <h2>Password section</h2>
     <p>NB! Passwords should match</p>
     <!--    Will also check that both passwords are similar-->
     <label>Password:
-        <input class="input" name="password" type="password" placeholder="Qwerty"/> </label><br/>
+        <input class="input password" name="password" type="password" placeholder="Qwerty"/> </label><br/>
     <label>Confirm:
-        <input class="input" name="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+        <input class="input confirm" name="confirm" id="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
     <!--    Submit button, as part of form section - part of passwords validation as well-->
     <button class="submit_button" onclick="successMessage()">Submit</button>
     <p id="password_error_message" class="error_message">

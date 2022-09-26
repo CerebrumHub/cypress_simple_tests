@@ -14,7 +14,9 @@ function checkInputPattern(naming) {
         document.getElementById("input_error_message").style.display = "none"
         console.log('Input field has valid characters')
     } else {
+        submit_button.disabled = true; //submit_button remains disabled
         document.getElementById("input_error_message").style.display = "block"
+        element.setAttribute('title', 'Input field contains not supported character')
         console.log('Input field has invalid character');
     }
 }
@@ -28,6 +30,7 @@ function onChange() {
         console.log('Checked that passwords have same values - valid')
     } else {
         document.getElementById("password_error_message").style.display = "block"
+        confirm.setAttribute('title', 'Both passwords should match')
         console.log('Passwords are different');
     }
 }
@@ -41,7 +44,8 @@ function stateHandle() {
     const password = document.querySelector('input[name=password]');
     const confirm = document.querySelector('input[name=confirm]');
 
-    if (document.querySelectorAll(".input:placeholder-shown").length === 0 && confirm.value === password.value) {
+    if (document.getElementById('username').value.indexOf(' ') == -1
+        && confirm.value === password.value && document.querySelectorAll(".input:placeholder-shown").length === 0) {
         submit_button.disabled = false; //button is enabled
         console.log('Submit button will be enabled')
     } else {
@@ -66,13 +70,10 @@ function handleSubmit(event) {
     submitTimer = setTimeout(() => {
         this.submit()
         console.log('Submitted after 5 seconds')
-    }, 2000)
+    }, 10000)
 }
 
 function cancel() {
     clearTimeout(submitTimer);
     console.log('Submit Canceled')
 }
-
-today = new Date().toLocaleDateString('en-ca')
-document.getElementById("birthday").setAttribute("max", today);

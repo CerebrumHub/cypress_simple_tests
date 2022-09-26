@@ -52,19 +52,26 @@
                 <input type="radio" name="freq" value="Monthly"/><label>Monthly</label><br>
                 <input type="radio" name="freq" value="Never"/><label>Never</label><br>
             </div>
+            <h2>Birthday</h2>
+            <p>Mandatory field that is set as required</p>
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday" required>
             <div class="w3-container w3-teal w3-center" style="width:50%">
                 <h1>Upload a file</h1>
+            </div>
+            <div>
+                <input required type="checkbox" ng-model="checkbox">Accept our privacy policy</input>
+                <input required type="checkbox">
+                <button><a href="cookiePolicy.html">Accept our cookie policy</a></button>
+                <div id="checkboxAlert" role="alert">
+                    <span ng-show="myForm.checkbox.$dirty && myForm.checkbox.$invalid" style="color:red"/>
+                </div>
             </div>
             <div class="w3-cell-row">
                 <div class="w3-container w3-cell">
                     <input type="file" id="myFile" name="filename">
                     <input type="submit">
                 </div>
-            </div>
-            <div>
-                <input type="checkbox">Accept our privacy policy</input>
-                <input type="checkbox">
-                <button><a href="cookiePolicy.html">Accept our cookie policy</a></button>
             </div>
         </div>
     </div>
@@ -103,6 +110,8 @@
         $('#num').text((count += 1));
     })
 
+    today = new Date().toLocaleDateString('en-ca')
+    document.getElementById("birthday").setAttribute("max", today);
 </script>
 </body>
 </html>

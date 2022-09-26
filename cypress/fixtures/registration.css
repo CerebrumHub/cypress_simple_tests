@@ -1,4 +1,3 @@
-/*Here will be CSS*/
 h2 {
     color: blue;
     font-weight: normal;
@@ -10,4 +9,16 @@ input:invalid {
 
 input:focus:invalid {
     box-shadow: none;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.error_message {
+    color: #df5000;
+    font: 1.2em "Fira Sans", sans-serif;
 }
