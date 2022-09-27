@@ -98,6 +98,10 @@ describe('Section 2: Visual tests', () => {
     })
 
     it('Car dropdown is correct', () => {
+        // Select second element and create screenshot for this area, and full page
+        // Don't forget do delete files and comment back if not using
+        // cy.get('#cars').select(1).screenshot('Cars drop-down')
+        // cy.screenshot('Full page screenshot')
         // Different solutions how get array length of elements in Cars dropdown
         cy.get('#cars').children().should('have.length', 4)
         cy.get('#cars').find('option').should('have.length', 4)
