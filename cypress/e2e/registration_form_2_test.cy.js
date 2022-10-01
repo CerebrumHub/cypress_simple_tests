@@ -97,7 +97,7 @@ describe('Section 2: Visual tests', () => {
         // Create test similar to previous one
     })
 
-    it.only('Car dropdown is correct', () => {
+    it('Car dropdown is correct', () => {
         // Select second element and create screenshot for this area, and full page
         // Don't forget to delete files and comment back if not using
         // cy.get('#cars').select(1).screenshot('Cars drop-down')
