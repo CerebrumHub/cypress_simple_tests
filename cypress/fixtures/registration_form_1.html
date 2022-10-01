@@ -27,20 +27,20 @@
         <p>Please enter your first name</p>
         <label for="firstName">First name:</label>
         <input type="text" id="firstName" name="firstName" placeholder="John" max="50"
-               onChange="checkInputPattern('firstName')" pattern='[a-zA-Z]*'>
+               onChange="checkInputPattern('firstName')" pattern='[a-zA-Z]*' title="Add first name">
 
         <h2>Last name</h2>
         <p>Please enter your last name</p>
         <label for="lastName">Last name:</label>
         <input type="text" data-testid="lastNameTestId" id="lastName" name="lastName" placeholder="Smith" min="1"
                max="30"
-               onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]*'>
+               onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]*' title="Add last name">
 
         <h2>Phone number</h2>
         <p>Only numeric data can be used</p>
         <label for="phoneNumber">Phone number:</label>
         <input class="input" type="number" id="phoneNumber" data-testid="phoneNumberTestId" placeholder="8775048423"
-               maxlength="10">
+               maxlength="10" title="Add phone number">
 
         <h2>Password section</h2>
         <p>NB! Passwords should match</p>

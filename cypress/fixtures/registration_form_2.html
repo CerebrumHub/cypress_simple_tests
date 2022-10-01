@@ -55,7 +55,7 @@
     <label for="username">Username:</label>
 
     <!--Max length and placeholder-->
-    <input class="input" type="text" id="username" name="username" placeholder="John01" min="1" max="50"
+    <input data-testid="user" class="input" type="text" id="username" name="username" placeholder="John01" min="1" max="50"
            required
            onChange="checkInputPattern('username')" pattern='[a-zA-Z0-9_]+' title="Please add username">
     <h3>Input email</h3>
@@ -63,25 +63,23 @@
     <input type="email" id="email" name="email" placeholder="aurevoir@ipanema.ee" maxlength="50"
            onchange="checkInputPattern('email')"
            pattern="[a-z0-9]+@[a-z0-9]+\.[a-z]{2,4}$"
-           required>
+           required title="Add email">
 
     <h2>First name</h2>
     <p>Please enter your first name</p>
-    <label for="firstName">First name:</label>
-    <input class="input" type="text" id="firstName" name="firstName" placeholder="John" min="1" max="50"
-           onChange="checkInputPattern('firstName')" pattern='[a-zA-Z]+' required>
+    <input class="input" type="text" data-cy="name" name="name" placeholder="John" min="1" max="50"
+           onChange="checkInputPattern('name')" pattern='[a-zA-Z]+' required title="Add first name">
 
     <h2>Last name</h2>
     <p>Please enter your last name</p>
     <label for="lastName">Last name:</label>
     <input class="input" type="text" data-testid="lastNameTestId" id="lastName" name="lastName" placeholder="Smith" min="1" max="30"
-           onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]+' required>
+           onChange="checkInputPattern('lastName')" pattern='[a-zA-Z]+' required title="Add last name">
 
     <h2>Phone number</h2>
     <p>Only numeric data can be used</p>
-    <label for="phoneNumber">Phone number:</label>
-    <input class="input" type="number" id="phoneNumber" data-testid="phoneNumberTestId" placeholder="8775048423"
-           maxlength="10" required>
+    <input class="input" type="number" data-testid="phoneNumberTestId" placeholder="8775048423"
+           maxlength="10" required title="Add phone number">
 
     <!--Anchor tag to page top-->
     <a href="#top">top</a>
