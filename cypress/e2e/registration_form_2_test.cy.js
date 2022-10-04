@@ -99,12 +99,18 @@ describe('Section 2: Visual tests', () => {
 
     it('Car dropdown is correct', () => {
         // Select second element and create screenshot for this area, and full page
-        // Don't forget do delete files and comment back if not using
+        // Don't forget to delete files and comment back if not using
         // cy.get('#cars').select(1).screenshot('Cars drop-down')
         // cy.screenshot('Full page screenshot')
+
         // Different solutions how get array length of elements in Cars dropdown
         cy.get('#cars').children().should('have.length', 4)
         cy.get('#cars').find('option').should('have.length', 4)
+        cy.get('#cars').find('option').eq(0).should('have.text', 'Volvo')
+        cy.get('#cars').find('option').then(options => {
+            const actual = [...options].map(option => option.value)
+            expect(actual).to.deep.eq(['volvo', 'saab', 'opel', 'audi'])
+        })
     })
 
     it('Favourite animal dropdown is correct', () => {
@@ -114,9 +120,9 @@ describe('Section 2: Visual tests', () => {
 
 function inputValidData() {
     cy.log('Username will be filled')
-    cy.get('#username').type('Something')
+    cy.get('input[data-testid="user"]').type('Something')
     cy.get('#email').type('validemail@yeap.com')
-    cy.get('#firstName').type('John')
+    cy.get('[data-cy="name"]').type('John')
     cy.get('#lastName').type('Doe')
     cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
     // If element has multiple classes, then one of them can be used
