@@ -122,6 +122,8 @@
         <option value="cat">Cat</option>
         <option value="snake">Snake</option>
         <option value="hippo">Hippo</option>
+        <option value="spider">Hippo</option>
+        <option value="mouse">Hippo</option>
     </select>
     <br><br>
 
@@ -129,9 +131,9 @@
     <p>NB! Passwords should match</p>
     <!--    Will also check that both passwords are similar-->
     <label>Password:
-        <input class="input password" name="password" type="password" placeholder="Qwerty"/> </label><br/>
+        <input id="password" name="password" type="password" placeholder="Qwerty"/> </label><br/>
     <label>Confirm:
-        <input class="input confirm" name="confirm" id="confirm" type="password" onChange="onChange()" placeholder="Qwerty"/> </label><br/>
+        <input name="confirm" id="confirm" type="password" onChange="passwordConfirmation()" placeholder="Qwerty"/> </label><br/>
     <!--    Submit button, as part of form section - part of passwords validation as well-->
     <button class="submit_button" onclick="successMessage()">Submit</button>
     <p id="password_error_message" class="error_message">
@@ -144,6 +146,20 @@
         <span class="close_button" onclick="this.parentElement.style.display='none';">&times;</span>
         User successfully submitted registration
     </div>
+    <script type="text/javascript">
+        function passwordConfirmation() {
+            const password = document.querySelector('input[id=password]');
+            const confirm = document.querySelector('input[id=confirm]');
+            if (confirm.value === password.value) {
+                document.getElementById("password_error_message").style.display = "none"
+                console.log('Checked that passwords have same values - valid')
+            } else {
+                document.getElementById("password_error_message").style.display = "block"
+                confirm.setAttribute('title', 'Both passwords should match')
+                console.log('Passwords are different');
+            }
+        }
+    </script>
     <script src="registration.js"></script>
     <link href="registration.css" rel="stylesheet" type="text/css">
 </form>
