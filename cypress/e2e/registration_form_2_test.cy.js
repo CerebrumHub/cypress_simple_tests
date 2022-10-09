@@ -126,9 +126,9 @@ function inputValidData() {
     cy.get('#lastName').type('Doe')
     cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
     // If element has multiple classes, then one of them can be used
-    cy.get('.password').type('MyPass')
+    cy.get('#password').type('MyPass')
     // To get multiple classes user .class1.class2 selector
-    cy.get('.input.confirm').type('MyPass')
+    cy.get('#confirm').type('MyPass')
     cy.get('[name="confirm"]').type('InvalidMyPass')
     cy.get('h2').contains('Password').click()
 }
