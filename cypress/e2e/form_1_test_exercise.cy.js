@@ -8,12 +8,11 @@ beforeEach(() => {
 /*
 Workshop 3 assignment:
 1 and 2 - If you see this text and founded file location in project tree, great job!
-3 - Find .type('MyPass') - should find 6, then click and duplicate with Ctrl + D, to find next use F3 and shift + F3
-4 - Uncomment lines 17 - 23, you can use Ctrl + / while selecting multiple or single line
+3 - Find .type('MyPass') - and then duplicate line 20 by using Shift + Alt + DownArrow
+4 - Uncomment lines 17 - 20, you can use Ctrl + / while selecting multiple or single line
 3 - Find and replace username2 to username
  */
 describe('This is first test suite', () => {
-    //TODO uncomment lines 18 - 21
     it('User can submit data only when valid mandatory values are added', () => {
         // cy.get('#username2').type('Something')
         // cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
