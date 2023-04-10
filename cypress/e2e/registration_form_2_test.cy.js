@@ -2,20 +2,11 @@ beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_2.html')
 })
 
-// Workshop #6 create following tests:
+/*
+Assignement 4: add content to the following tests
+*/
 
 describe('Section 1: Functional tests', () => {
-    it('User can submit form with valid data and only mandatory fields added', ()=>{
-        // Add test steps for filling in ONLY mandatory fields
-        // Assert that submit button is enabled
-        // Assert that after submitting the form system show successful message
-    })
-
-    it('User can submit form with all fields added', ()=>{
-        // Add test steps for filling in ALL fields
-        // Assert that submit button is enabled
-        // Assert that after submitting the form system show successful message
-    })
 
     it('User can use only same both first and validation passwords', ()=>{
         // Add test steps for filling in only mandatory fields
@@ -24,25 +15,39 @@ describe('Section 1: Functional tests', () => {
         // Assert that successful message is not visible
         // Assert that error message is visible
     })
+    
+    it('User can submit form with all fields added', ()=>{
+        // Add test steps for filling in ALL fields
+        // Assert that submit button is enabled
+        // Assert that after submitting the form system show successful message
+    })
+
+    it('User can submit form with valid data and only mandatory fields added', ()=>{
+        // Add test steps for filling in ONLY mandatory fields
+        // Assert that submit button is enabled
+        // Assert that after submitting the form system show successful message
+    })
 
     it('Check that submit button cannot be selected if username is empty', () => {
-        // Submit button by default is disabled and cannot be clicked
+        // This is an example, how to check that submit
+        // button by default is disabled and cannot be clicked
         cy.get('button[class="submit_button"]').should('be.disabled')
 
-        // use function in order to fill the form with correct data
+        // This is an example, how functions can be used in the code to avoid duplicated lines of code
+        // We use function inputValidData() in order to fill the form with correct data
         inputValidData()
 
         // Add steps for emptying username input field
-
         // Assert that submit button is still disabled
-        cy.get('button[class="submit_button"]').should('be.disabled')
     })
 
-    //Add more similar tests for checking other mandatory field's absence
+    // You can add more similar tests for checking other mandatory field's absence
 
 })
 
-// Workshop #7 create more visual tests
+/*
+Assignement 5: create more visual tests
+*/
 
 describe('Section 2: Visual tests', () => {
     it('Check that logo is correct and has correct size', () => {
@@ -60,28 +65,34 @@ describe('Section 2: Visual tests', () => {
 
         // Get navigation element, find siblings that contains h1 and check if it has Registration form in string
         cy.get('nav').siblings('h1').should('have.text', 'Registration form number 2')
+        
+        // Get navigation element, find its first child, check the link content and click it
         cy.get('nav').children().eq(0).should('be.visible')
             .and('have.attr', 'href', 'registration_form_1.html')
             .click()
-        // Check that currently opened URL is value:
+        
+        // Check that currently opened URL is correct
         cy.url().should('contain', '/registration_form_1.html')
-        // Visit previous page
+        
+        // Go back to previous page
         cy.go('back')
         cy.log('Back again in registration form 2')
     })
 
-    it('Check that URL to Cerebrum Hub page is correct and clickable', () => {
-        //Create similar test for checking second link to Cerebrum Hub homepage
-    })
+    // Create similar test for checking second link to Cerebrum Hub homepage
+    // Check that URL to Cerebrum Hub page is correct and clickable
 
     it('Check that radio button list is correct', () => {
-        // Array has totally 4 elements
+        // Array of found elements with given selector has 4 elements in total
         cy.get('input[type="radio"]').should('have.length', 4)
+        
         /*
-        .next() is needed because of HTML structure:
+        command .next() is needed because of HTML structure:
         <input type="radio" id="htmlFavLanguage" name="fav_language" value="HTML">
         <label for="htmlFavLanguage">HTML</label><br>
-         */
+        it will move to element that is situated next in HTML 
+        */
+
         cy.get('input[type="radio"]').next().eq(0).should('have.text','HTML').and('not.be.checked')
         cy.get('input[type="radio"]').next().eq(1).should('have.text','CSS').and('not.be.checked')
         cy.get('input[type="radio"]').next().eq(2).should('have.text','JavaScript').and('not.be.checked')
@@ -93,29 +104,32 @@ describe('Section 2: Visual tests', () => {
         cy.get('input[type="radio"]').eq(0).should('not.be.checked')
     })
 
-    it('Check that checkbox list is correct', () => {
-        // Create test similar to previous one
-    })
+    // Create test similar to previous one
 
     it('Car dropdown is correct', () => {
+        // Here is an example how to explicitely create screenshot from the code
         // Select second element and create screenshot for this area, and full page
-        // Don't forget to delete files and comment back if not using
-        // cy.get('#cars').select(1).screenshot('Cars drop-down')
-        // cy.screenshot('Full page screenshot')
+        cy.get('#cars').select(1).screenshot('Cars drop-down')
+        cy.screenshot('Full page screenshot')
 
-        // Different solutions how get array length of elements in Cars dropdown
+        // Here are given different solutions how to get the length of array of elements in Cars dropdown
+        // Next 3 lines of code do exactly the same!
         cy.get('#cars').children().should('have.length', 4)
         cy.get('#cars').find('option').should('have.length', 4)
+        
+        //Check  that first element in the dropdown has text Volvo
         cy.get('#cars').find('option').eq(0).should('have.text', 'Volvo')
+        
+        // Advanced level how to check the content of the Cars dropdown
         cy.get('#cars').find('option').then(options => {
             const actual = [...options].map(option => option.value)
             expect(actual).to.deep.eq(['volvo', 'saab', 'opel', 'audi'])
         })
     })
 
-    it('Favourite animal dropdown is correct', () => {
-        // Create test similar to previous one
-    })
+
+    // Create test similar to previous one
+
 })
 
 function inputValidData() {
@@ -132,4 +146,3 @@ function inputValidData() {
     cy.get('[name="confirm"]').type('InvalidMyPass')
     cy.get('h2').contains('Password').click()
 }
-
