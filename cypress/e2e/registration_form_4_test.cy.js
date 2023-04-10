@@ -64,6 +64,7 @@ describe('Input fields', () => {
     })
 
     it('BMW should not be listed in cars list', () => {
+        
         // Check list size is 4
         cy.get('#cars').children().should('have.length', 5)
 
