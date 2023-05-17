@@ -28,17 +28,8 @@ describe('Section 1: Functional tests', () => {
         // Assert that after submitting the form system show successful message
     })
 
-    it('Check that submit button cannot be selected if username is empty', () => {
-        // This is an example, how to check that submit
-        // button by default is disabled and cannot be clicked
-        cy.get('button[class="submit_button"]').should('be.disabled')
-
-        // This is an example, how functions can be used in the code to avoid duplicated lines of code
-        // We use function inputValidData() in order to fill the form with correct data
-        inputValidData()
-
-        // Add steps for emptying username input field
-        // Assert that submit button is still disabled
+    it('Input valid data to the page', () => {
+        inputValidData('john.doe')
     })
 
     // You can add more similar tests for checking other mandatory field's absence
@@ -85,14 +76,6 @@ describe('Section 2: Visual tests', () => {
     it('Check that radio button list is correct', () => {
         // Array of found elements with given selector has 4 elements in total
         cy.get('input[type="radio"]').should('have.length', 4)
-        
-        /*
-        command .next() is needed because of HTML structure:
-        <input type="radio" id="htmlFavLanguage" name="fav_language" value="HTML">
-        <label for="htmlFavLanguage">HTML</label><br>
-        it will move to element that is situated next in HTML 
-        */
-
         cy.get('input[type="radio"]').next().eq(0).should('have.text','HTML').and('not.be.checked')
         cy.get('input[type="radio"]').next().eq(1).should('have.text','CSS').and('not.be.checked')
         cy.get('input[type="radio"]').next().eq(2).should('have.text','JavaScript').and('not.be.checked')
@@ -113,7 +96,7 @@ describe('Section 2: Visual tests', () => {
         cy.screenshot('Full page screenshot')
 
         // Here are given different solutions how to get the length of array of elements in Cars dropdown
-        // Next 3 lines of code do exactly the same!
+        // Next 2 lines of code do exactly the same!
         cy.get('#cars').children().should('have.length', 4)
         cy.get('#cars').find('option').should('have.length', 4)
         

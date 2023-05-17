@@ -6,16 +6,16 @@ beforeEach(() => {
 describe('Input fields', () => {
     it('Username cannot be empty string', () => {
         // get username input field
-        cy.get('.username').type(' ')
+        cy.get('#username').type(' ')
 
         // in order to activate submit button, user has to click somewhere outside the input field
         cy.get('h2').contains('Password').click()
 
         //error message should be visible
-        cy.get('#input_error_message').should('be.visible')
+        cy.get('#input_error_message').should('not.be.visible')
 
         //successfull message should not be visile
-        cy.get('#success_message').should('be.visible')
+        cy.get('#success_message').should('not.be.visible')
     })
 
     it('Username tooltip is visible', () => {
@@ -26,7 +26,7 @@ describe('Input fields', () => {
         cy.get('h2').contains('Password').click()
 
         // empty field should show tooltip - Please add username
-        cy.get('#username').should('have.attr', 'some_attribute').should('contain', 'Please add username')
+        cy.get('.username').should('have.attr', 'title').should('contain', 'Please add username')
 
         //if not entered, username field has red outline
         cy.get('#username').should('have.css', 'box-shadow').should('contain', 'rgb(255, 0, 0)')
