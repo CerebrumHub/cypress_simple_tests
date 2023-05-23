@@ -25,11 +25,11 @@ describe('Section 1: Functional tests', () => {
     it('User can submit form with valid data and only mandatory fields added', ()=>{
         // Add test steps for filling in ONLY mandatory fields
         // Assert that submit button is enabled
-        // Assert that after submitting the form system show successful message
+        // Assert that after submitting the form system shows successful message
     })
 
     it('Input valid data to the page', () => {
-        inputValidData()
+        inputValidData('john.doe')
     })
 
     // You can add more similar tests for checking other mandatory field's absence
@@ -125,6 +125,5 @@ function inputValidData() {
     // If element has multiple classes, then one of them can be used
     cy.get('#password').type('MyPass')
     cy.get('#confirm').type('MyPass')
-    cy.get('[name="confirm"]').type('InvalidMyPass')
     cy.get('h2').contains('Password').click()
 }
