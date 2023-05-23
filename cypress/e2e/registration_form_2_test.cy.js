@@ -29,7 +29,7 @@ describe('Section 1: Functional tests', () => {
     })
 
     it('Input valid data to the page', () => {
-        inputValidData('john.doe')
+        inputValidData()
     })
 
     // You can add more similar tests for checking other mandatory field's absence
@@ -124,7 +124,6 @@ function inputValidData() {
     cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
     // If element has multiple classes, then one of them can be used
     cy.get('#password').type('MyPass')
-    // To get multiple classes user .class1.class2 selector
     cy.get('#confirm').type('MyPass')
     cy.get('[name="confirm"]').type('InvalidMyPass')
     cy.get('h2').contains('Password').click()
