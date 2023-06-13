@@ -16,12 +16,14 @@ Assignment 2:
  5. Add comment to the first test containing today’s date
  */
 
-describe('This is first test suite', () => {
+describe('This is first test suite, Anatoli Sergejev', () => {
     it('User can submit data only when valid mandatory values are added', () => {
+         //June 13, 2023
+         
+        cy.get('[data-testid="phoneNumberTestId"]').type('555666777')
+        cy.get('input[name="password"]').type('PutnHl0')
+        cy.get('[name="confirm"]').type('PutnHl0')
         cy.get('#username').type('Something')
-        cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-        cy.get('input[name="password"]').type('MyPass')
-        cy.get('[name="confirm"]').type('MyPass')
 
         //in order to activate submit button, user has to click somewhere outside the input field
         cy.get('h2').contains('Password').click()
