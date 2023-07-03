@@ -2,9 +2,8 @@ beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_3.html')
 })
 
-//BONUS TASK: add visual tests for registration form 3
-
 /*
+BONUS TASK: add visual tests for registration form 3
 Task list:
 * Test suite for visual tests for registration form 3 is already created
 * Create tests to verify visual parts of the page:
@@ -14,15 +13,9 @@ Task list:
     * email format
  */
 
-describe('Section 1: visual tests', ()=> {
-    it('This is my first test', () => {
-        // This is empty template
-    });
-})
-
-//BONUS TASK: add functional tests for registration form 3
 
 /*
+BONUS TASK: add functional tests for registration form 3
 Task list:
 * Create second test suite for functional tests
 * Create tests to verify logic of the page:

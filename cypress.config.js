@@ -1,8 +1,7 @@
 const {defineConfig} = require("cypress");
 
 module.exports = defineConfig({
-    pageLoadTimeout: 8000,
-    chromeWebSecurity: false,
+    pageLoadTimeout: 15000,
 
     env: {
         firstCookieValue: "firstValue",

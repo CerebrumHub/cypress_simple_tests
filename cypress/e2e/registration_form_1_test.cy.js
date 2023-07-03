@@ -7,7 +7,7 @@ beforeEach(() => {
 Assignment 2:
 
  1. Update the name of test suite by adding you name: “This is first test suite, John Smith”
- 2. Replace text ‘MyPass’ in the first test with your own chosen password (2 places) - passwords should match
+ 2. Replace text ‘Password123’ in the first test with your own chosen password (2 places) - passwords should match
  3. Change phone number in the first test to 555666777
  4. Change the order of steps in the first test:
       -first set phone number
@@ -19,13 +19,12 @@ Assignment 2:
 describe('This is first test suite', () => {
     it('User can submit data only when valid mandatory values are added', () => {
         cy.get('#username').type('Something')
-        cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-        cy.get('input[name="password"]').type('MyPass')
-        cy.get('[name="confirm"]').type('MyPass')
+        cy.get('[data-testid="phoneNumberTestId"]').type('5656565656')
+        cy.get('input[name="password"]').type('Password123')
+        cy.get('[name="confirm"]').type('Password123')
 
         //in order to activate submit button, user has to click somewhere outside the input field
         cy.get('h2').contains('Password').click()
-
         cy.get('.submit_button').should('be.enabled')
         cy.get('.submit_button').click()
 
@@ -40,11 +39,12 @@ describe('This is first test suite', () => {
         cy.get('#success_message').should('have.css', 'display', 'block')
     });
 
+
     it('User can use only same both first and validation passwords', () => {
         cy.get('#username').type('johnDoe')
         cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-        cy.get('input[name="password"]').type('MyPass')
-        cy.get('[name="confirm"]').type('MyPass123')
+        cy.get('input[name="password"]').type('Password123')
+        cy.get('[name="confirm"]').type('Password123123')
         // type('{enter}') is clicking native button e.g to click backspace use '{backspace}'
         cy.get('[name="confirm"]').type('{enter}')
 
@@ -62,13 +62,14 @@ describe('This is first test suite', () => {
     })
 
     it('User cannot submit data when username is absent', () => {
+        cy.get('#username').type('johnDoe')
         cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-        cy.get('input[name="password"]').type('MyPass')
-        cy.get('[name="confirm"]').type('MyPass')
+        cy.get("input[name='password']").type('Password123')
+        cy.get('[name="confirm"]').type('Password123')
 
         // Scroll back to username input field
         cy.get('#username').scrollIntoView()
-        cy.get('#username').clear().type('  ')
+        cy.get('#username').clear()
         cy.get('h2').contains('Password').click()
 
         // Asserting that Submit button is disabled
@@ -77,7 +78,7 @@ describe('This is first test suite', () => {
         // Assert that success message is not visible
         cy.get('#success_message').should('not.be.visible')
 
-        // Assert that correct error message is visible and contain Mandatory input field...
+        // Assert that correct error message is visible and contain given text
         cy.get('#input_error_message').should('be.visible').should('contain', 'Mandatory input field is not valid or empty!')
 
         // Assert that username has tooltip with error message

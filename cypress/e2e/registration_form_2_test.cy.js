@@ -26,13 +26,12 @@ describe('Section 1: Functional tests', () => {
         // Add test steps for filling in ONLY mandatory fields
         // Assert that submit button is enabled
         // Assert that after submitting the form system shows successful message
+
+        // example, how to use function
+        inputValidData('johnDoe')
     })
 
-    it('Input valid data to the page', () => {
-        inputValidData('john.doe')
-    })
-
-    // You can add more similar tests for checking other mandatory field's absence
+    // Add at least 1 test for checking some mandatory field's absence
 
 })
 
@@ -44,12 +43,14 @@ describe('Section 2: Visual tests', () => {
     it('Check that logo is correct and has correct size', () => {
         cy.log('Will check logo source and size')
         cy.get('img').should('have.attr', 'src').should('include', 'cerebrum_hub_logo')
-        // get element and check its parameter height, to be equal 178
+        // get element and check its parameter height, to less than 178 and greater than 100
         cy.get('img').invoke('height').should('be.lessThan', 178)
-            .and('be.greaterThan', 100)
+            .and('be.greaterThan', 100)   
     })
 
-    // Create similar test for checking second picture
+    it('My test for second picture', () => {
+        // Create similar test for checking the second picture
+    });
 
     it('Check navigation part', () => {
         cy.get('nav').children().should('have.length', 2)
@@ -70,16 +71,23 @@ describe('Section 2: Visual tests', () => {
         cy.log('Back again in registration form 2')
     })
 
-    // Create similar test for checking second link to Cerebrum Hub homepage
-    // Check that URL to Cerebrum Hub page is correct and clickable
+    // Create similar test for checking the second link 
 
     it('Check that radio button list is correct', () => {
         // Array of found elements with given selector has 4 elements in total
         cy.get('input[type="radio"]').should('have.length', 4)
-        cy.get('input[type="radio"]').next().eq(0).should('have.text','HTML').and('not.be.checked')
-        cy.get('input[type="radio"]').next().eq(1).should('have.text','CSS').and('not.be.checked')
-        cy.get('input[type="radio"]').next().eq(2).should('have.text','JavaScript').and('not.be.checked')
-        cy.get('input[type="radio"]').next().eq(3).should('have.text','PHP').and('not.be.checked')
+
+        // Verify labels of the radio buttons
+        cy.get('input[type="radio"]').next().eq(0).should('have.text','HTML')
+        cy.get('input[type="radio"]').next().eq(1).should('have.text','CSS')
+        cy.get('input[type="radio"]').next().eq(2).should('have.text','JavaScript')
+        cy.get('input[type="radio"]').next().eq(3).should('have.text','PHP')
+
+        //Verify default state of radio buttons
+        cy.get('input[type="radio"]').eq(0).should('not.be.checked')
+        cy.get('input[type="radio"]').eq(1).should('not.be.checked')
+        cy.get('input[type="radio"]').eq(2).should('not.be.checked')
+        cy.get('input[type="radio"]').eq(3).should('not.be.checked')
 
         // Selecting one will remove selection from other radio button
         cy.get('input[type="radio"]').eq(0).check().should('be.checked')
@@ -87,7 +95,7 @@ describe('Section 2: Visual tests', () => {
         cy.get('input[type="radio"]').eq(0).should('not.be.checked')
     })
 
-    // Create test similar to previous one
+    // Create test similar to previous one verifying check boxes
 
     it('Car dropdown is correct', () => {
         // Here is an example how to explicitely create screenshot from the code
@@ -115,9 +123,9 @@ describe('Section 2: Visual tests', () => {
 
 })
 
-function inputValidData() {
+function inputValidData(username) {
     cy.log('Username will be filled')
-    cy.get('input[data-testid="user"]').type('Something')
+    cy.get('input[data-testid="user"]').type(username)
     cy.get('#email').type('validemail@yeap.com')
     cy.get('[data-cy="name"]').type('John')
     cy.get('#lastName').type('Doe')
