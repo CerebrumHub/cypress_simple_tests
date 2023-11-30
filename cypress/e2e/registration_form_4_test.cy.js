@@ -9,7 +9,7 @@ describe('Input fields', () => {
 
         // in order to activate submit button, user has to click somewhere outside the input field
         cy.get('h2').contains('Password').click()
-        cy.get('#input_error_message').should('not.be.visible')c<
+        cy.get('#input_error_message').should('not.be.visible')
         cy.get('#success_message').should('not.be.visible')
     })
 
@@ -30,7 +30,7 @@ describe('Input fields', () => {
         cy.get('#username2').should('have.attr', 'max', '501')
     })
 
-    it('Username should support only lower letters and numbers', () => {
+    it('Username should support only letters and numbers', () => {
         // check with regex supporter format
         cy.get('#username').should('have.attr', 'pattern', '[a-zA-Z0-9_]*')
     })
