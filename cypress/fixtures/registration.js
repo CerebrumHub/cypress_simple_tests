@@ -50,7 +50,7 @@ function stateHandle() {
         console.log('Submit button will be enabled')
     } else {
         submit_button.disabled = true; //submit_button remains disabled
-        console.log('Submit button will be disable')
+        console.log('Submit button will be disabled')
     }
 }
 

@@ -12,14 +12,14 @@
     <img data-testid="picture" src="cerebrum_hub_logo.png" width="178" height="166" alt="cerebrum_hub_logo">
 </div>
 
-<!--TODO simplify this form, should be all same stuff that mentione previously and jquery-->
+<!--TODO simplify this form, should be all same stuff that mentioned previously and jquery-->
 <form class="w3-container w3-card-4 w3-light-grey" style="width:50%" name="myForm"
       ng-app="registration" ng-controller="validateCtrl" action="upload_file.html" novalidate>
     <div class="w3-cell-row">
         <div class="w3-container w3-cell">
             <div>
                 <label for="name">Name</label><br>
-                <input class="w3-border-0" id="name" name="name" value="Name..." required type="text"/>
+                <input class="w3-border-0" id="name" name="name" placeholder="Type your name" required type="text"/>
             </div>
             <label for="email">Email</label><br>
             <input class="w3-border-0 email" name="email" ng-model="email" required type="email">
@@ -44,7 +44,7 @@
                 </select>
             </div>
             <div>
-                <label>Date of birth</label>
+                <label>Date of registration</label>
                 <input type="date">
             </div>
             <div><label>Select the frequency of receiving our newsletter:</label><br>
@@ -71,7 +71,7 @@
             <div class="w3-cell-row">
                 <div class="w3-container w3-cell">
                     <input type="file" id="myFile" name="filename">
-                    <input type="submit">
+                    <button type="submit">Submit file</button>
                 </div>
             </div>
         </div>

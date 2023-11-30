@@ -14,6 +14,9 @@ describe('Section 1: Functional tests', () => {
         // Assert that submit button is not enabled
         // Assert that successful message is not visible
         // Assert that error message is visible
+        // Change the test, so the passwords would match
+        // Add assertion, that error message is not visible anymore
+        // Add assertion, that submit button is now enabled
     })
     
     it('User can submit form with all fields added', ()=>{
@@ -27,7 +30,8 @@ describe('Section 1: Functional tests', () => {
         // Assert that submit button is enabled
         // Assert that after submitting the form system shows successful message
 
-        // example, how to use function
+        // example, how to use function, which fills in all mandatory data
+        // in order to see the content of the function, scroll to the end of the file
         inputValidData('johnDoe')
     })
 
@@ -43,7 +47,8 @@ describe('Section 2: Visual tests', () => {
     it('Check that logo is correct and has correct size', () => {
         cy.log('Will check logo source and size')
         cy.get('img').should('have.attr', 'src').should('include', 'cerebrum_hub_logo')
-        // get element and check its parameter height, to less than 178 and greater than 100
+        // get element and check its parameter height
+        // it should be less than 178 and greater than 100
         cy.get('img').invoke('height').should('be.lessThan', 178)
             .and('be.greaterThan', 100)   
     })
@@ -89,7 +94,7 @@ describe('Section 2: Visual tests', () => {
         cy.get('input[type="radio"]').eq(2).should('not.be.checked')
         cy.get('input[type="radio"]').eq(3).should('not.be.checked')
 
-        // Selecting one will remove selection from other radio button
+        // Selecting one will remove selection from the other radio button
         cy.get('input[type="radio"]').eq(0).check().should('be.checked')
         cy.get('input[type="radio"]').eq(1).check().should('be.checked')
         cy.get('input[type="radio"]').eq(0).should('not.be.checked')
@@ -98,8 +103,8 @@ describe('Section 2: Visual tests', () => {
     // Create test similar to previous one verifying check boxes
 
     it('Car dropdown is correct', () => {
-        // Here is an example how to explicitely create screenshot from the code
-        // Select second element and create screenshot for this area, and full page
+        // Here is just an example how to explicitely create screenshot from the code
+        // Select second element and create screenshot for this area or full page
         cy.get('#cars').select(1).screenshot('Cars drop-down')
         cy.screenshot('Full page screenshot')
 
@@ -108,7 +113,7 @@ describe('Section 2: Visual tests', () => {
         cy.get('#cars').children().should('have.length', 4)
         cy.get('#cars').find('option').should('have.length', 4)
         
-        //Check  that first element in the dropdown has text Volvo
+        // Check  that first element in the dropdown has text Volvo
         cy.get('#cars').find('option').eq(0).should('have.text', 'Volvo')
         
         // Advanced level how to check the content of the Cars dropdown
@@ -117,7 +122,6 @@ describe('Section 2: Visual tests', () => {
             expect(actual).to.deep.eq(['volvo', 'saab', 'opel', 'audi'])
         })
     })
-
 
     // Create test similar to previous one
 
@@ -130,7 +134,6 @@ function inputValidData(username) {
     cy.get('[data-cy="name"]').type('John')
     cy.get('#lastName').type('Doe')
     cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-    // If element has multiple classes, then one of them can be used
     cy.get('#password').type('MyPass')
     cy.get('#confirm').type('MyPass')
     cy.get('h2').contains('Password').click()

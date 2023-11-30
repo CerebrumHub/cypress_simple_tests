@@ -1,4 +1,4 @@
-// Before each test (it...) load .html page
+// Before each test (it...) open .html page
 beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_1.html')
 })
@@ -45,7 +45,9 @@ describe('This is first test suite', () => {
         cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
         cy.get('input[name="password"]').type('Password123')
         cy.get('[name="confirm"]').type('Password123123')
-        // type('{enter}') is clicking native button e.g to click backspace use '{backspace}'
+        
+        // type('{enter}') is clicking native enter button from thekeyboard
+        // for example, to click backspace use '{backspace}'
         cy.get('[name="confirm"]').type('{enter}')
 
         // Scroll to bottom of the page
