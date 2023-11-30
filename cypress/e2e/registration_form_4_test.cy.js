@@ -32,15 +32,15 @@ describe('Input fields', () => {
 
     it('Username should support only letters and numbers', () => {
         // check with regex supporter format
-        cy.get('#username').should('have.attr', 'pattern', '[a-zA-Z0-9_]*')
+        cy.get('#username').should('have.attr', 'pattern', '[a-zA-Z0-9_]+')
     })
 
-    it('Email input should support correct pattern', () => {
+    it.only('Email input should support correct pattern', () => {
         // Check regex
         // input invalid email
         // check that email element has red border outline
         // submit button should not be active
-        cy.get('#email').should('have.attr', 'pattern').should('contain', 'a-z0-9')
+        cy.get('#email').should('have.attr', 'pattern').should('contain', '[a-z0-9]+@[a-z0-9]+\\.[a-z]{2,4}$')
         cy.get('#email123').type('invalid')
         cy.get('h2').contains('Password').click()
         cy.get('#email').should('have.css', 'image').should('contain', 'rgb(255, 0, 0)')
