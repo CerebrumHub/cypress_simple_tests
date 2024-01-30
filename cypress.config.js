@@ -12,4 +12,7 @@ module.exports = defineConfig({
             return config;
         }
     },
+
+    viewportWidth: 1500,
+    viewportHeight: 800,
 });
