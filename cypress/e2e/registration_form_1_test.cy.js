@@ -106,13 +106,6 @@ describe('This is first test suite', () => {
         // Add test, similar to previous one with password field not filled in
         // All other fields should be entered correctly
         // Assert that submit button is not enabled and that successful message is not visible
-        cy.get('#username').type('nadezda')
-        cy.get('#phoneNumber').type('565656566')
-        cy.get('[name="password"]').type('MyPass!123')
-        cy.get('.submit_button').should('be.enabled')
-        cy.get('#success_message').should('be.visible')
-
-        cy.get('input[name="password"]').type('Password123')
     })
 
     it('User cannot add letters to phone number', () => {

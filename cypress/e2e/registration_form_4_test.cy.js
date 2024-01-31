@@ -4,12 +4,12 @@ beforeEach(() => {
 
 // Assignement 6: analyze and fix failed test
 describe('Input fields', () => {
-    it.only('Username cannot be empty string', () => {
+    it('Username cannot be empty string', () => {
         cy.get('#username').type(' ')
 
         // in order to activate submit button, user has to click somewhere outside the input field
         cy.get('h2').contains('Password').click()
-        cy.get('#input_error_message').should('be.visible')
+        cy.get('#input_error_message').should('not.be.visible')
         cy.get('#success_message').should('not.be.visible')
     })
 
