@@ -111,6 +111,8 @@ describe('This is first test suite', () => {
         cy.get('[name="password"]').type('MyPass!123')
         cy.get('.submit_button').should('be.enabled')
         cy.get('#success_message').should('be.visible')
+
+        cy.get('input[name="password"]').type('Password123')
     })
 
     it('User cannot add letters to phone number', () => {
