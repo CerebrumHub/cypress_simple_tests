@@ -32,7 +32,7 @@ describe('Input fields', () => {
 
     it('Username should support only letters and numbers', () => {
         // check with regex supporter format
-        cy.get('#username').should('have.attr', 'pattern', '[a-zA-Z0-9_]+')
+        cy.get('#user').should('have.attr', 'pattern', '[a-zA-Z0-9_]+')
     })
 
     it('Email input should support correct pattern', () => {
@@ -54,7 +54,7 @@ describe('Input fields', () => {
     })
 
     it('BMW should not be listed in the list of the cars', () => {
-        
+
         // Check list size is 4
         cy.get('#cars').children().should('have.length', 5)
 
